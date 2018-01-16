@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,9 +13,7 @@ namespace AWE_Projekt_WS_17.Models
     // Sie können Profildaten für den Benutzer hinzufügen, indem Sie der ApplicationUser-Klasse weitere Eigenschaften hinzufügen. Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkID=317594.
     public class ApplicationUser : IdentityUser
     {
-        public int ID { get; set; }
-        public string Email {get; set;}
-        public string Password { get; set; }
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Beachten Sie, dass der "authenticationType" mit dem in "CookieAuthenticationOptions.AuthenticationType" definierten Typ übereinstimmen muss.
@@ -33,8 +34,7 @@ namespace AWE_Projekt_WS_17.Models
         {
             return new ApplicationDbContext();
         }
-
-        public virtual DbSet<ApplicationUser> Users { get; set; }
+        
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
@@ -50,28 +50,48 @@ namespace AWE_Projekt_WS_17.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int Owner { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<ContentGroup> ContentGroups { get; set; }
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
     
     public class Tag
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<Course> Courses { get; set; }
     }
 
     public class Enrollment
     {
         public DateTime Date { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int UserID { get; set; }
+        [Key]
+        [Column(Order = 2)]
         public int CourseID { get; set; }
         public int Rating { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+        public virtual Course Course { get; set; }
     }
 
     public class ContentGroup
     {
+        [Key]
+        [Column(Order = 1)]
         public int CourseID { get; set; }
+        [Key]
+        [Column(Order = 2)]
         public int ContentID { get; set; }
         public int Order { get; set; }
         public string Header { get; set; }
+
+        public virtual Course Course { get; set; }
+        public virtual ICollection<ContentElement> ContentElements { get; set; }
     }
 
     public class ContentElement
@@ -81,11 +101,16 @@ namespace AWE_Projekt_WS_17.Models
         public string Url { get; set; }
         public int TypeID { get; set; }
         public int Order { get; set; }
+
+        public virtual ICollection<ContentGroup> ContentGroups { get; set; }
+        public virtual Type Type { get; set; }
     }
 
     public class Type
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<ContentElement> ContentElements { get; set; }
     }
 }
