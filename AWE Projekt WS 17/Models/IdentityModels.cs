@@ -10,6 +10,9 @@ namespace AWE_Projekt_WS_17.Models
     // Sie können Profildaten für den Benutzer hinzufügen, indem Sie der ApplicationUser-Klasse weitere Eigenschaften hinzufügen. Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?LinkID=317594.
     public class ApplicationUser : IdentityUser
     {
+        public int ID { get; set; }
+        public string Email {get; set;}
+        public string Password { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Beachten Sie, dass der "authenticationType" mit dem in "CookieAuthenticationOptions.AuthenticationType" definierten Typ übereinstimmen muss.
@@ -31,6 +34,7 @@ namespace AWE_Projekt_WS_17.Models
             return new ApplicationDbContext();
         }
 
+        public virtual DbSet<ApplicationUser> Users { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
