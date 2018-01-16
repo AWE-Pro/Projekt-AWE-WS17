@@ -30,6 +30,14 @@ namespace AWE_Projekt_WS_17.Models
         {
             return new ApplicationDbContext();
         }
+
+        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Enrollment> Enrollments { get; set; }
+        public virtual DbSet<ContentGroup> ContentGroups { get; set; }
+        public virtual DbSet<ContentElement> ContentElements { get; set; }
+        public virtual DbSet<Type> Types { get; set; }
+
     }
 
     public class Course
