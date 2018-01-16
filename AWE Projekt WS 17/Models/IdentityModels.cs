@@ -47,6 +47,7 @@ namespace AWE_Projekt_WS_17.Models
     public class Course
     {
         public int ID { get; set; }
+        [Display(Name = "Kursname")]
         public string Title { get; set; }
         public string Description { get; set; }
         public int Owner { get; set; }
@@ -59,6 +60,7 @@ namespace AWE_Projekt_WS_17.Models
     public class Tag
     {
         public int ID { get; set; }
+        [Display(Name = "Tag-Name")]
         public string Name { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }
@@ -109,6 +111,7 @@ namespace AWE_Projekt_WS_17.Models
     public class Type
     {
         public int ID { get; set; }
+        [Display(Name = "Type-Name")]
         public string Name { get; set; }
 
         public virtual ICollection<ContentElement> ContentElements { get; set; }
