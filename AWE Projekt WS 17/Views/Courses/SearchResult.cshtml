@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<AWE_Projekt_WS_17.Models.Course>
 
 @{
-    ViewBag.Title = "SearchResult";
+    ViewBag.Title = "Index";
 }
 
-<h2>SearchResult</h2>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -40,4 +44,3 @@
     }
 
 </table>
-
