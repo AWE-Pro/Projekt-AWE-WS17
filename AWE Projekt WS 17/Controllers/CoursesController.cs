@@ -47,6 +47,22 @@ namespace AWE_Projekt_WS_17.Controllers
             return View();
         }
 
+        public ActionResult CourseSearch(string tagname)
+        {
+            List<Course> Courses = new List<Course>();
+            foreach (var course in db.Courses)
+            {
+                foreach (var tag in course.Tags)
+                {
+                    if (tag.Name.Equals(tagname))
+                    {
+                        Courses.Add(course);
+                    }
+                }
+            }
+            return View("SearchResult", Courses);
+        }
+
         // POST: Courses/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.

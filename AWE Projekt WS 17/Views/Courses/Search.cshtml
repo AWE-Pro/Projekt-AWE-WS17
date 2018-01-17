@@ -5,8 +5,10 @@
 }
 
 <h2>Search</h2>
-
-@using (Html.BeginForm())
+<p>
+    @Html.ActionLink("Startseite", "Index", "Home")
+</p>
+@using (Html.BeginForm("CourseSearch", "Courses", FormMethod.Post))
 {
     <div class="form-horizontal">
         <hr />
