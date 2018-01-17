@@ -1,6 +1,8 @@
 namespace AWE_Projekt_WS_17.Migrations
 {
+    using AWE_Projekt_WS_17.Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -15,18 +17,27 @@ namespace AWE_Projekt_WS_17.Migrations
 
         protected override void Seed(AWE_Projekt_WS_17.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var courses = new List<Course>
+            {
+                new Course
+                {
+                    ID = 1,
+                    Title = "AWE",
+                    Description = "Isn geiles Fach",
+                    Owner = 1,
+                    Tags = new List<Tag>
+                {
+                    new Tag
+                    {
+                        ID = 1,
+                        Name = "Awesome",
+                    }
+                }
+            }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            };
+            courses.ForEach(course => context.Courses.AddOrUpdate(x => x.ID, course));
+
         }
     }
 }

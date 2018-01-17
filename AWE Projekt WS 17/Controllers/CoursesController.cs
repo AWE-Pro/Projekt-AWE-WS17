@@ -47,17 +47,18 @@ namespace AWE_Projekt_WS_17.Controllers
             return View();
         }
 
-        public ActionResult CourseSearch(string tagname)
+        public ActionResult CourseSearch(Tag tagname)
         {
             List<Course> Courses = new List<Course>();
-            foreach (var course in db.Courses)
+            for (int k=0;k<db.Courses.Count(); k++)
             {
-                foreach (var tag in course.Tags)
+                for(int i=0; i< db.Courses.ToList()[k].Tags.Count(); i++)
                 {
-                    if (tag.Name.Equals(tagname))
+                    if (db.Courses.ToList()[k].Tags.ToList()[i].Name.Equals(tagname.Name))
                     {
-                        Courses.Add(course);
+                        Courses.Add(db.Courses.ToList()[k]);
                     }
+                  
                 }
             }
             return View("SearchResult", Courses);
