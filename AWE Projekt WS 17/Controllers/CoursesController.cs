@@ -14,7 +14,6 @@ namespace AWE_Projekt_WS_17.Controllers
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Courses
         public async Task<ActionResult> Index()
         {
@@ -47,22 +46,30 @@ namespace AWE_Projekt_WS_17.Controllers
             return View();
         }
 
-        public ActionResult CourseSearch(Tag tagname)
+        public ActionResult SearchResult(Tag tagname)
         {
             List<Course> Courses = new List<Course>();
-            for (int k=0;k<db.Courses.Count(); k++)
+            if (tagname != null)
             {
-                for(int i=0; i< db.Courses.ToList()[k].Tags.Count(); i++)
+                for (int k = 0; k < db.Courses.Count(); k++)
                 {
-                    if (db.Courses.ToList()[k].Tags.ToList()[i].Name.Equals(tagname.Name))
+                    for (int i = 0; i < db.Courses.ToList()[k].Tags.Count(); i++)
                     {
-                        Courses.Add(db.Courses.ToList()[k]);
+                        if (db.Courses.ToList()[k].Tags.ToList()[i].Name.Equals(tagname.Name))
+                        {
+                            Courses.Add(db.Courses.ToList()[k]);
+                        }
+
                     }
-                  
                 }
+                return View(Courses);
             }
-            return View("SearchResult", Courses);
+            else
+            {
+                return View(Courses);
+            }
         }
+
 
         // POST: Courses/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
