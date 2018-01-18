@@ -26,7 +26,9 @@
         </div>
     </div>
 }
+
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
 
     <link rel="stylesheet" href="~/Content/kendo/2018.1.117/kendo.common-bootstrap.core.min.css" />
@@ -43,7 +45,7 @@
             minLength: 1,
             dataSource: {
                 type: "json",
-                serverfiltering: true,
+                serverFiltering: true,
                 transport: {
                     read: {
                         url: "@Url.Action("GetTags")",
