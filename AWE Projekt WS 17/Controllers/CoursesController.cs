@@ -46,6 +46,11 @@ namespace AWE_Projekt_WS_17.Controllers
             return View();
         }
 
+        public async Task<JsonResult> GetTags(string text)
+        {
+            return Json(await db.Courses.Where(x => x.Title.StartsWith(text)).ToListAsync(), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult SearchResult(Tag tagname)
         {
             List<Course> Courses = new List<Course>();

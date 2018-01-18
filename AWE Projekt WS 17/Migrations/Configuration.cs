@@ -37,10 +37,10 @@ namespace AWE_Projekt_WS_17.Migrations
             tags.ForEach(s => context.Tags.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
 
-            AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");
+            /**AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");
             AddOrUpdateTag(context, "Volkswirtschaftslehre", "Boring");
             AddOrUpdateTag(context, "Algorithmen und Datenstrukturen", "Boring");
-            AddOrUpdateTag(context, "Data Mining", "Funny");
+            AddOrUpdateTag(context, "Data Mining", "Funny");*/
         }
 
         void AddOrUpdateTag(ApplicationDbContext context, string courseTitle, string tagName)

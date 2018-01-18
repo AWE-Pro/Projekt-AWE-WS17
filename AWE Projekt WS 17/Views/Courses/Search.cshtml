@@ -26,3 +26,35 @@
         </div>
     </div>
 }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link rel="stylesheet" href="~/Content/kendo/2018.1.117/kendo.common-bootstrap.core.min.css" />
+    <link rel="stylesheet" href="~/Content/kendo/2018.1.117/kendo.bootstrap.min.css" />
+
+    <script src="~/Scripts/kendo/2018.1.117/kendo.ui.core.min.js"></script>
+    <script src="~/Scripts/kendo/2018.1.117/cultures/kendo.culture.de-DE.min.js"></script>
+
+    <script>
+        $("#Name").kendoAutoComplete({
+            placeholder: "Bitte auswählen",
+            dataTextField: "Name",
+            filter: "startswith",
+            minLength: 1,
+            dataSource: {
+                type: "json",
+                serverfiltering: true,
+                transport: {
+                    read: {
+                        url: "@Url.Action("GetTags")",
+                        data: {
+                            text: function () {
+                                return $("#Name").val();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}
