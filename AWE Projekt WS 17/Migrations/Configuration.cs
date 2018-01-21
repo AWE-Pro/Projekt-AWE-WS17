@@ -37,6 +37,19 @@ namespace AWE_Projekt_WS_17.Migrations
             tags.ForEach(s => context.Tags.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
 
+            var contentGroups = new List<ContentGroup>
+            {
+                new ContentGroup {CourseID = 1, Order = 1, Header = "Wirtschaft"},
+                new ContentGroup {CourseID = 2, Order = 2, Header = "Rechnen"},
+                new ContentGroup {CourseID = 3, Order = 3, Header = "Formeln"},
+                new ContentGroup {CourseID = 1, Order = 4, Header = "Programmieren"},
+                new ContentGroup {CourseID = 2, Order = 5, Header = "Algorithmen"},
+                new ContentGroup {CourseID = 3, Order = 6, Header = "Methoden"},
+                new ContentGroup {CourseID = 1, Order = 7, Header = "Statistik"},
+            };
+            contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => p.Header, s));
+            context.SaveChanges();
+
             /**AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");
             AddOrUpdateTag(context, "Volkswirtschaftslehre", "Boring");
             AddOrUpdateTag(context, "Algorithmen und Datenstrukturen", "Boring");

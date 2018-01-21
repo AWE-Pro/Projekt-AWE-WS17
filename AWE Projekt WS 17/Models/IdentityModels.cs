@@ -82,12 +82,9 @@ namespace AWE_Projekt_WS_17.Models
     }
 
     public class ContentGroup
-    {
-        [Key]
-        [Column(Order = 1)]
+    {       
         public int CourseID { get; set; }
         [Key]
-        [Column(Order = 2)]
         public int ContentID { get; set; }
         public int Order { get; set; }
         public string Header { get; set; }
