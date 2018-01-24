@@ -19,9 +19,8 @@ namespace AWE_Projekt_WS_17.Migrations
         {
             var courses = new List<Course>
             {
-
-                new Course { Title = "Volkswirtschaftslehre", Description = "Angebot und Nachfrage", Owner = 18 },
-                new Course { Title = "Algorithmen und Datenstrukturen", Description = "Programmier Basics Java", Owner = 11 },
+                new Course { Title = "Volkswirtschaftslehre", Description = "Angebot und Nachfrage", Owner = 1 },
+                new Course { Title = "Algorithmen und Datenstrukturen", Description = "Programmier Basics Java", Owner = 2 },
                 new Course { Title = "Data Mining", Description = "Mining Methoden und Neuronale Netzwerke", Owner = 3 }
             };
             courses.ForEach(s => context.Courses.AddOrUpdate(p => p.Title, s));
@@ -37,23 +36,44 @@ namespace AWE_Projekt_WS_17.Migrations
             tags.ForEach(s => context.Tags.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
 
+            var types = new List<Models.Type>
+            {
+                new Models.Type {Name ="Video"},
+                new Models.Type {Name ="PDF"},
+                new Models.Type {Name ="Text"}
+            };
+            types.ForEach(s => context.Types.AddOrUpdate(p => p.Name, s));
+            context.SaveChanges();
+
+            var contentElements = new List<ContentElement>
+            {
+                new ContentElement {Description ="Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
+                new ContentElement {Description ="Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=2},
+                new ContentElement {Description ="Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=3},
+                new ContentElement {Description ="weiteres Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
+                new ContentElement {Description ="weiteres Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=2},
+                new ContentElement {Description ="weiteres Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=3}
+
+            };
+            contentElements.ForEach(s => context.ContentElements.AddOrUpdate(p => p.Description, s));
+            context.SaveChanges();
+
             var contentGroups = new List<ContentGroup>
             {
-                new ContentGroup {CourseID = 1, Order = 1, Header = "Wirtschaft"},
-                new ContentGroup {CourseID = 2, Order = 2, Header = "Rechnen"},
-                new ContentGroup {CourseID = 3, Order = 3, Header = "Formeln"},
-                new ContentGroup {CourseID = 1, Order = 4, Header = "Programmieren"},
-                new ContentGroup {CourseID = 2, Order = 5, Header = "Algorithmen"},
-                new ContentGroup {CourseID = 3, Order = 6, Header = "Methoden"},
-                new ContentGroup {CourseID = 1, Order = 7, Header = "Statistik"},
+                new ContentGroup {CourseID = 1, ContentID=1, Order = 1, Header = "Wirtschaft"},
+                new ContentGroup {CourseID = 2, ContentID=2, Order = 2, Header = "Rechnen"},
+                new ContentGroup {CourseID = 3, ContentID=3, Order = 3, Header = "Formeln"},
+                new ContentGroup {CourseID = 1, ContentID=4, Order = 4, Header = "Programmieren"},
+                new ContentGroup {CourseID = 2, ContentID=5, Order = 5, Header = "Algorithmen"},
+                new ContentGroup {CourseID = 3, ContentID=6, Order = 6, Header = "Methoden"},
             };
             contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => p.Header, s));
             context.SaveChanges();
 
-            /**AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");
+            AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");
             AddOrUpdateTag(context, "Volkswirtschaftslehre", "Boring");
             AddOrUpdateTag(context, "Algorithmen und Datenstrukturen", "Boring");
-            AddOrUpdateTag(context, "Data Mining", "Funny");*/
+            AddOrUpdateTag(context, "Data Mining", "Funny");
         }
 
         void AddOrUpdateTag(ApplicationDbContext context, string courseTitle, string tagName)
