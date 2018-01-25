@@ -68,6 +68,8 @@ namespace AWE_Projekt_WS_17.Models
 
     public class Enrollment
     {
+        [Key]
+        [Column(Order = 3)]
         public DateTime Date { get; set; }
         [Key]
         [Column(Order = 1)]

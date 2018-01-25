@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AWE_Projekt_WS_17.Models.ContentGroup>
+@{
+    ViewBag.Title = "Course";
+}
+
+<h2>Course</h2>
+<h3>@ViewBag.Course</h3><br />
+
+<div>
+    <h4>Content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var item in Model)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Header)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.Header) <br /><br />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Order)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.Order)  <br /><br />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ContentElement.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.ContentElement.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ContentElement.Order)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.ContentElement.Order)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ContentElement.Url)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => item.ContentElement.Url)<br /> <hr />
+            </dd>
+
+        }
+
+    </dl>
+</div>
