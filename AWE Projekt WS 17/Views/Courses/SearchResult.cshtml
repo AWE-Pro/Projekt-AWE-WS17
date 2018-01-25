@@ -31,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Einschreiben", "Kurs", new { CourseId = item.ID, UserId = User.Identity })
+                @Html.ActionLink("Einschreiben", "Kurs", new { CourseId = item.ID })
             </td>
         </tr>
     }

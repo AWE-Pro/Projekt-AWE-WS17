@@ -34,17 +34,17 @@ namespace AWE_Projekt_WS_17.Models
         {
             return new ApplicationDbContext();
         }
-        
+
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
         public virtual DbSet<ContentGroup> ContentGroups { get; set; }
         public virtual DbSet<ContentElement> ContentElements { get; set; }
         public virtual DbSet<Type> Types { get; set; }
-       
+
     }
 
-        public class Course
+    public class Course
     {
         public int ID { get; set; }
         [Display(Name = "Kursname")]
@@ -56,7 +56,7 @@ namespace AWE_Projekt_WS_17.Models
         public virtual ICollection<ContentGroup> ContentGroups { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
-    
+
     public class Tag
     {
         public int ID { get; set; }
@@ -71,12 +71,15 @@ namespace AWE_Projekt_WS_17.Models
         public DateTime Date { get; set; }
         [Key]
         [Column(Order = 1)]
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         [Key]
+        [ForeignKey("Course")]
         [Column(Order = 2)]
         public int CourseID { get; set; }
+        [Range(0,5)]
         public int Rating { get; set; }
 
+        [ForeignKey("UserID")]
         public virtual ApplicationUser User { get; set; }
         public virtual Course Course { get; set; }
     }
