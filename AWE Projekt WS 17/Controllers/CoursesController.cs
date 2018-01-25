@@ -52,11 +52,6 @@ namespace AWE_Projekt_WS_17.Controllers
             return Json(await db.Tags.Where(x => x.Name.StartsWith(text)).ToListAsync(), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CompareOrder(int order1, int order2)
-        {
-            return null;
-        }
-
         public ActionResult Kurs(int CourseId)
         {
             db.Enrollments.Add(new Enrollment { UserID = User.Identity.GetUserId(), CourseID = CourseId, Date = DateTime.Now, Rating = 0 });
