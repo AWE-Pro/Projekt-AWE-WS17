@@ -70,7 +70,7 @@ namespace AWE_Projekt_WS_17.Controllers
             }
             else
             {
-                ViewBag.Average = "Zu wenige Bewertungen";
+                ViewBag.Average = "Not enough Ratings yet!";
             }
 
 
@@ -101,14 +101,15 @@ namespace AWE_Projekt_WS_17.Controllers
                     List<int> ratings = new List<int>() { 1, 2, 3, 4, 5 };
                     ViewBag.Rating = new SelectList(ratings);
                 }
-                else
-                {
-                    List<int> ratings = new List<int>();
-                    ViewBag.Rating = new SelectList(ratings);
-                }
+               
                 //Eintrag in Enrollments-Tabelle
                 db.Enrollments.Add(new Enrollment { UserID = User.Identity.GetUserId(), CourseID = CourseId, Date = DateTime.Now, Rating = 0 });
                 db.SaveChanges();
+            }
+            else
+            {
+                List<int> ratings = new List<int>();
+                ViewBag.Rating = new SelectList(ratings);
 
             }
 
