@@ -54,6 +54,27 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult Course(int CourseId)
         {
+            //Durchschnittliche Wertung
+            List<int> average = new List<int>();
+            for (int k = 0; k < db.Enrollments.Count(); k++)
+            {
+                if (!(db.Enrollments.ToList()[k].Rating.Equals(0)))
+                {
+                    average.Add(db.Enrollments.ToList()[k].Rating);
+                }
+
+            }
+            if (average.Count() > 0)
+            {
+                ViewBag.Average = average.Average();
+            }
+            else
+            {
+                ViewBag.Average = "Zu wenige Bewertungen";
+            }
+
+
+            //Kursnamen heraussuchen
             for (int i = 0; i < db.Courses.Count(); i++)
             {
                 if (db.Courses.ToList()[i].ID.Equals(CourseId))
@@ -62,11 +83,36 @@ namespace AWE_Projekt_WS_17.Controllers
                 }
             }
             ViewBag.Title = db.Courses.Where(x => x.ID.Equals(CourseId));
+            //Prüfen ob User eingeloggt
             if (User.Identity.GetUserId() != null)
             {
+                //überprüfen ob User bereits bewertet hat
+                bool rating = false;
+                for (int r = 0; r < db.Enrollments.Count(); r++)
+                {
+                    if (!(db.Enrollments.ToList()[r].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[r].Rating.Equals(0)))
+                    {
+                        rating = true;
+                    }
+
+                }
+                if (rating == false)
+                {
+                    List<int> ratings = new List<int>() { 1, 2, 3, 4, 5 };
+                    ViewBag.Rating = new SelectList(ratings);
+                }
+                else
+                {
+                    List<int> ratings = new List<int>();
+                    ViewBag.Rating = new SelectList(ratings);
+                }
+                //Eintrag in Enrollments-Tabelle
                 db.Enrollments.Add(new Enrollment { UserID = User.Identity.GetUserId(), CourseID = CourseId, Date = DateTime.Now, Rating = 0 });
                 db.SaveChanges();
+
             }
+
+            //Sortierte Liste zurückgeben
             List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ThenBy(x => x.ContentElement.Order).ToList();
 
             return View(groups);

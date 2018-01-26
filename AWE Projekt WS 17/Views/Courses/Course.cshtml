@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<AWE_Projekt_WS_17.Models.ContentGroup>
 @{
     ViewBag.Title = "Course";
+    SelectList list = ViewBag.Rating;
 }
 
 <h2>Course</h2>
 <h3>@ViewBag.Course</h3><br />
+
+@Html.DisplayName("Average Rating"):
+@ViewBag.Average<br /><br />
+
+@Html.DisplayName("Rating"):
+@Html.DropDownList("Rating", list , "Auswahl")
 
 <div>
     <h4>Content</h4>
