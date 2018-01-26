@@ -96,6 +96,8 @@ namespace AWE_Projekt_WS_17.Models
         [Column(Order = 2)]
         public int ContentID { get; set; }
         public int Order { get; set; }
+        [Key]
+        [Column(Order = 3)]
         public string Header { get; set; }
 
         public virtual Course Course { get; set; }

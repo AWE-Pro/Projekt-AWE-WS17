@@ -66,8 +66,11 @@ namespace AWE_Projekt_WS_17.Migrations
                 new ContentGroup {CourseID = 1, ContentID=4, Order = 4, Header = "Programmieren"},
                 new ContentGroup {CourseID = 2, ContentID=5, Order = 5, Header = "Algorithmen"},
                 new ContentGroup {CourseID = 3, ContentID=6, Order = 6, Header = "Methoden"},
+                new ContentGroup {CourseID = 1, ContentID=2, Order = 1, Header = "Wirtschaft"},
+                new ContentGroup {CourseID = 1, ContentID=3, Order = 4, Header = "Programmieren"},
+                new ContentGroup {CourseID = 1, ContentID=5, Order = 4, Header = "Programmieren"}
             };
-            contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => p.Header, s));
+            contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => new { p.ContentID, p.CourseID, p.Header }, s));
             context.SaveChanges();
 
             AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");

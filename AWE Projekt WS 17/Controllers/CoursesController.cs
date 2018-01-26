@@ -67,7 +67,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 db.Enrollments.Add(new Enrollment { UserID = User.Identity.GetUserId(), CourseID = CourseId, Date = DateTime.Now, Rating = 0 });
                 db.SaveChanges();
             }
-            List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).GroupBy(p => p.ContentElement.Order).SelectMany(k => k).ToList();
+            List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ThenBy(x => x.ContentElement.Order).ToList();
 
             return View(groups);
         }
