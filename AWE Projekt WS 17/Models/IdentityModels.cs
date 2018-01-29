@@ -88,31 +88,26 @@ namespace AWE_Projekt_WS_17.Models
 
     public class ContentGroup
     {
-        [Key]
-        [Column(Order = 1)]
+        public int ID { get; set; }
         public int CourseID { get; set; }
-        [Key]
-        [ForeignKey("ContentElement")]
-        [Column(Order = 2)]
-        public int ContentID { get; set; }
         public int Order { get; set; }
-        [Key]
-        [Column(Order = 3)]
         public string Header { get; set; }
 
         public virtual Course Course { get; set; }
-        public virtual ContentElement ContentElement { get; set; }
+        public virtual ICollection<ContentElement> ContentElements { get; set; }
     }
 
     public class ContentElement
     {
         public int ID { get; set; }
+        [ForeignKey("ContentGroup")]
+        public int ContentID { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
         public int TypeID { get; set; }
         public int Order { get; set; }
 
-        public virtual ICollection<ContentGroup> ContentGroups { get; set; }
+        public virtual ContentGroup ContentGroups { get; set; }
         public virtual Type Type { get; set; }
     }
 
