@@ -51,10 +51,10 @@ namespace AWE_Projekt_WS_17.Migrations
             {
                 new ContentGroup {CourseID = 1, Order = 1, Header = "Wirtschaft"},
                 new ContentGroup {CourseID = 2, Order = 2, Header = "Rechnen"},
-                new ContentGroup {CourseID = 3, Order = 3, Header = "Formeln"},
-                new ContentGroup {CourseID = 1, Order = 4, Header = "Programmieren"},
-                new ContentGroup {CourseID = 2, Order = 5, Header = "Algorithmen"},
-                new ContentGroup {CourseID = 3, Order = 6, Header = "Methoden"}
+                new ContentGroup {CourseID = 3, Order = 1, Header = "Formeln"},
+                new ContentGroup {CourseID = 1, Order = 2, Header = "Programmieren"},
+                new ContentGroup {CourseID = 2, Order = 1, Header = "Algorithmen"},
+                new ContentGroup {CourseID = 3, Order = 2, Header = "Methoden"}
             };
             contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => p.Header, s));
             context.SaveChanges();
