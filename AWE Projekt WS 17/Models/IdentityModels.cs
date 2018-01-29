@@ -107,7 +107,7 @@ namespace AWE_Projekt_WS_17.Models
         public int TypeID { get; set; }
         public int Order { get; set; }
 
-        public virtual ContentGroup ContentGroups { get; set; }
+        public virtual ContentGroup ContentGroup { get; set; }
         public virtual Type Type { get; set; }
     }
 

@@ -45,32 +45,32 @@ namespace AWE_Projekt_WS_17.Migrations
             types.ForEach(s => context.Types.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
 
-            var contentElements = new List<ContentElement>
-            {
-                new ContentElement {Description ="Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
-                new ContentElement {Description ="Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=2},
-                new ContentElement {Description ="Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=3},
-                new ContentElement {Description ="weiteres Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
-                new ContentElement {Description ="weiteres Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=2},
-                new ContentElement {Description ="weiteres Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=3}
-
-            };
-            contentElements.ForEach(s => context.ContentElements.AddOrUpdate(p => p.Description, s));
-            context.SaveChanges();
+            
 
             var contentGroups = new List<ContentGroup>
             {
-                new ContentGroup {CourseID = 1, ContentID=1, Order = 1, Header = "Wirtschaft"},
-                new ContentGroup {CourseID = 2, ContentID=2, Order = 2, Header = "Rechnen"},
-                new ContentGroup {CourseID = 3, ContentID=3, Order = 3, Header = "Formeln"},
-                new ContentGroup {CourseID = 1, ContentID=4, Order = 4, Header = "Programmieren"},
-                new ContentGroup {CourseID = 2, ContentID=5, Order = 5, Header = "Algorithmen"},
-                new ContentGroup {CourseID = 3, ContentID=6, Order = 6, Header = "Methoden"},
-                new ContentGroup {CourseID = 1, ContentID=2, Order = 1, Header = "Wirtschaft"},
-                new ContentGroup {CourseID = 1, ContentID=3, Order = 4, Header = "Programmieren"},
-                new ContentGroup {CourseID = 1, ContentID=5, Order = 4, Header = "Programmieren"}
+                new ContentGroup {CourseID = 1, Order = 1, Header = "Wirtschaft"},
+                new ContentGroup {CourseID = 2, Order = 2, Header = "Rechnen"},
+                new ContentGroup {CourseID = 3, Order = 3, Header = "Formeln"},
+                new ContentGroup {CourseID = 1, Order = 4, Header = "Programmieren"},
+                new ContentGroup {CourseID = 2, Order = 5, Header = "Algorithmen"},
+                new ContentGroup {CourseID = 3, Order = 6, Header = "Methoden"}
             };
-            contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => new { p.ContentID, p.CourseID, p.Header }, s));
+            contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => p.Header, s));
+            context.SaveChanges();
+
+            var contentElements = new List<ContentElement>
+            {
+                new ContentElement {ContentID = 1, Description ="Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
+                new ContentElement {ContentID = 2, Description ="Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=2},
+                new ContentElement {ContentID = 3, Description ="Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=1},
+                new ContentElement {ContentID = 4, Description ="weiteres Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
+                new ContentElement {ContentID = 5, Description ="weiteres Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=1},
+                new ContentElement {ContentID = 6, Description ="weiteres Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=1},
+                new ContentElement {ContentID = 1, Description ="NOCH ein weiteres Tolles ContentElement im PDF-Format", Url ="blululul",TypeID=2, Order=2},
+                new ContentElement {ContentID = 2, Description ="NOCH ein weiteres Tolles ContentElement im Text-Format", Url ="blaaaulul",TypeID=3, Order=1}
+            };
+            contentElements.ForEach(s => context.ContentElements.AddOrUpdate(p => p.Description, s));
             context.SaveChanges();
 
             AddOrUpdateTag(context, "Volkswirtschaftslehre", "Bad");
