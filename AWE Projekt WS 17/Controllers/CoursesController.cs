@@ -114,7 +114,7 @@ namespace AWE_Projekt_WS_17.Controllers
             }
 
             //Sortierte Liste zurückgeben
-            List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ThenBy(x => x.Order).ToList();
+            List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ThenBy(x => x.ContentElements.OrderBy(p => p.Order)).ToList();
 
             return View(groups);
         }
