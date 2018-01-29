@@ -91,7 +91,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 bool rating = false;
                 for (int r = 0; r < db.Enrollments.Count(); r++)
                 {
-                    if (db.Enrollments.ToList()[r].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[r].CourseID == CourseId  && !db.Enrollments.ToList()[r].Rating.Equals(0))
+                    if (db.Enrollments.ToList()[r].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[r].CourseID == CourseId && !db.Enrollments.ToList()[r].Rating.Equals(0))
                     {
                         rating = true;
                     }
@@ -119,10 +119,10 @@ namespace AWE_Projekt_WS_17.Controllers
 
             }
             List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ToList();
-            for (int i =0; i< groups.Count(); i++)
+            for (int i = 0; i < groups.Count(); i++)
             {
-               groups[i].ContentElements = groups[i].ContentElements.OrderBy(x => x.Order).ToList();
-                
+                groups[i].ContentElements = groups[i].ContentElements.OrderBy(x => x.Order).ToList();
+
             }
             //Sortierte Liste zurückgeben
             return View(groups);
@@ -130,6 +130,7 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult Rating(int rating, int Id)
         {
+            bool timer = false;
             List<Enrollment> entrys = new List<Enrollment>();
             for (int i = 0; i < db.Enrollments.Count(); i++)
             {
@@ -145,11 +146,15 @@ namespace AWE_Projekt_WS_17.Controllers
                 if (db.Enrollments.ToList()[i].Equals(entry))
                 {
                     db.Enrollments.ToList()[i].Rating = rating;
-                    
-
+                    timer = true;
                 }
             }
-            db.SaveChanges();
+            
+            if(timer == true)
+            {
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Course", new { CourseId = Id });
         }
 
