@@ -10,8 +10,13 @@
 @Html.DisplayName("Average Rating"):
 @ViewBag.Average<br /><br />
 
-@Html.DisplayName("Rating"):
-@Html.DropDownList("Rating", list, "Auswahl")
+@using (Html.BeginForm("Rating", "Courses", FormMethod.Post))
+{
+    @Html.Label("Rating")
+    @Html.DropDownList("Rating", list, "Auswahl")
+    <input type="hidden" name="Id" value="@ViewBag.ID" />
+    <input type="submit" value="Rate" class="btn btn-default" new {ID=@ViewBag.Id } />
+}
 
 <div>
     <h4>Content</h4>

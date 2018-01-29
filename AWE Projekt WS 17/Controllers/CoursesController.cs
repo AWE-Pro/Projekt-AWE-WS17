@@ -54,11 +54,12 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult Course(int CourseId)
         {
+            ViewBag.ID = CourseId;
             //Durchschnittliche Wertung
             List<int> average = new List<int>();
             for (int k = 0; k < db.Enrollments.Count(); k++)
             {
-                if (!(db.Enrollments.ToList()[k].Rating.Equals(0)))
+                if (db.Enrollments.ToList()[k].CourseID == CourseId && !db.Enrollments.ToList()[k].Rating.Equals(0))
                 {
                     average.Add(db.Enrollments.ToList()[k].Rating);
                 }
@@ -90,7 +91,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 bool rating = false;
                 for (int r = 0; r < db.Enrollments.Count(); r++)
                 {
-                    if (!(db.Enrollments.ToList()[r].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[r].Rating.Equals(0)))
+                    if (db.Enrollments.ToList()[r].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[r].CourseID == CourseId  && !db.Enrollments.ToList()[r].Rating.Equals(0))
                     {
                         rating = true;
                     }
@@ -101,7 +102,12 @@ namespace AWE_Projekt_WS_17.Controllers
                     List<int> ratings = new List<int>() { 1, 2, 3, 4, 5 };
                     ViewBag.Rating = new SelectList(ratings);
                 }
-               
+                else
+                {
+                    List<int> ratings = new List<int>();
+                    ViewBag.Rating = new SelectList(ratings);
+                }
+
                 //Eintrag in Enrollments-Tabelle
                 db.Enrollments.Add(new Enrollment { UserID = User.Identity.GetUserId(), CourseID = CourseId, Date = DateTime.Now, Rating = 0 });
                 db.SaveChanges();
@@ -122,6 +128,30 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(groups);
         }
 
+        public ActionResult Rating(int rating, int Id)
+        {
+            List<Enrollment> entrys = new List<Enrollment>();
+            for (int i = 0; i < db.Enrollments.Count(); i++)
+            {
+                if (db.Enrollments.ToList()[i].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[i].CourseID == Id)
+                {
+                    entrys.Add(db.Enrollments.ToList()[i]);
+                }
+            }
+            entrys = entrys.OrderByDescending(x => x.Date).ToList();
+            Enrollment entry = entrys[0];
+            for (int i = 0; i < db.Enrollments.Count(); i++)
+            {
+                if (db.Enrollments.ToList()[i].Equals(entry))
+                {
+                    db.Enrollments.ToList()[i].Rating = rating;
+                    
+
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Course", new { CourseId = Id });
+        }
 
 
         public ActionResult SearchResult(Tag tagname)
