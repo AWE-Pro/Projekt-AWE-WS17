@@ -112,10 +112,13 @@ namespace AWE_Projekt_WS_17.Controllers
                 ViewBag.Rating = new SelectList(ratings);
 
             }
-
+            List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ToList();
+            for (int i =0; i< groups.Count(); i++)
+            {
+               groups[i].ContentElements = groups[i].ContentElements.OrderBy(x => x.Order).ToList();
+                
+            }
             //Sortierte Liste zurückgeben
-            List<ContentGroup> groups = db.ContentGroups.ToList().Where(x => x.CourseID.Equals(CourseId)).ToList().OrderBy(x => x.Order).ThenBy(x => x.ContentElements.OrderBy(p => p.Order)).ToList();
-
             return View(groups);
         }
 
