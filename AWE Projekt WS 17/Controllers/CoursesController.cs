@@ -54,6 +54,7 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult Course(int CourseId)
         {
+            ViewBag.User = User.Identity.GetUserId();
             ViewBag.ID = CourseId;
             //Durchschnittliche Wertung
             List<int> average = new List<int>();
@@ -128,34 +129,32 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(groups);
         }
 
-        public ActionResult Rating(int rating, int Id)
+        public ActionResult Rating(int rating, int id , string userid)
         {
-            bool timer = false;
+            
             List<Enrollment> entrys = new List<Enrollment>();
             for (int i = 0; i < db.Enrollments.Count(); i++)
             {
-                if (db.Enrollments.ToList()[i].UserID.Equals(User.Identity.GetUserId()) && db.Enrollments.ToList()[i].CourseID == Id)
+                if (db.Enrollments.ToList()[i].UserID.Equals(userid) && db.Enrollments.ToList()[i].CourseID == id)
                 {
                     entrys.Add(db.Enrollments.ToList()[i]);
                 }
             }
             entrys = entrys.OrderByDescending(x => x.Date).ToList();
             Enrollment entry = entrys[0];
-            for (int i = 0; i < db.Enrollments.Count(); i++)
+
+            db.Enrollments.Add(new Enrollment { UserID = userid, CourseID = id, Date = DateTime.Now, Rating = rating });
+            db.SaveChanges();
+           /** for (int i = 0; i < db.Enrollments.Count(); i++)
             {
                 if (db.Enrollments.ToList()[i].Equals(entry))
                 {
                     db.Enrollments.ToList()[i].Rating = rating;
-                    timer = true;
+                    db.SaveChanges();
                 }
-            }
+            }*/
             
-            if(timer == true)
-            {
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("Course", new { CourseId = Id });
+            return RedirectToAction("Course", new { CourseId = id });
         }
 
 

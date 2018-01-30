@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Course";
     SelectList list = ViewBag.Rating;
+    int id = ViewBag.ID;
+    string userid = ViewBag.User;
 }
 
 <h2>Course</h2>
@@ -14,7 +16,9 @@
 {
     @Html.Label("Rating")
     @Html.DropDownList("Rating", list, "Auswahl")
-    <input type="hidden" name="Id" value="@ViewBag.ID" />
+    @Html.Hidden("id", id)
+    @Html.Hidden("userid", userid)
+
     <input type="submit" value="Rate" class="btn btn-default" />
 }
 
