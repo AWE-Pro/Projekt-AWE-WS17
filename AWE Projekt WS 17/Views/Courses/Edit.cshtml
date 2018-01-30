@@ -1,58 +1,52 @@
-﻿@model AWE_Projekt_WS_17.Models.Course
-
+﻿
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "CourseContent";
 }
 
-<h2>Edit</h2>
+<br />
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Course</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+<button class="btn btn-primary" type="submit">new</button>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
+<h2>Course Content</h2>
+
+<head>
+    <style>
+        div.container {
+            width: 100%;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<form>
+
+    <div class="container">
+        <div class="form-group col-md-4">
+            <h4>Description and Type</h4>
+            <label for="inputDescription">Description</label>
+            <input type="text" class="form-control" id="inputDescription">
+            <label for="inputType">Type</label>
+            <input type="text" class="form-control" id="inputType" placeholder="Video">
+
         </div>
+        <div class="form-group col-md-4">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <h4>Value</h4>
+            <label for="value">Value (e.g. Hyperlink to Videofile)</label>
+            <input type="url" class="form-control" id="inputUrl">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
-            </div>
         </div>
+        <div class="form-group col-md-4">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+            <h4>Order</h4>
+            <label for="order">Select Position of Content</label>
+            <input type="number" class="form-control" id="inputNumber">
+
         </div>
+        <div style="clear:both;"></div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+</form>
