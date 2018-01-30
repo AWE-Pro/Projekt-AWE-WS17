@@ -34,6 +34,7 @@ namespace AWE_Projekt_WS_17.Models
         {
             return new ApplicationDbContext();
         }
+        
 
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
