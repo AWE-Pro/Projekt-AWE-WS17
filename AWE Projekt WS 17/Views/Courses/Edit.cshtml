@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "CourseContent";
 }
@@ -12,9 +13,17 @@
 
 <head>
     <style>
-        div.container {
-            width: 100%;
+
+        .test
+        {
             border: 2px solid black;
+            border-color: #0174DF;
+            height: 200px;
+        }
+
+        .middle
+        {
+            margin: 0px 50px 0px 50px;
         }
     </style>
 </head>
@@ -22,22 +31,23 @@
 <form>
 
     <div class="container">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3 test">
             <h4>Description and Type</h4>
             <label for="inputDescription">Description</label>
             <input type="text" class="form-control" id="inputDescription">
             <label for="inputType">Type</label>
             <input type="text" class="form-control" id="inputType" placeholder="Video">
 
+            
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3 test middle">
 
             <h4>Value</h4>
             <label for="value">Value (e.g. Hyperlink to Videofile)</label>
             <input type="url" class="form-control" id="inputUrl">
 
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3 test">
 
             <h4>Order</h4>
             <label for="order">Select Position of Content</label>
