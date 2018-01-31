@@ -182,6 +182,11 @@ namespace AWE_Projekt_WS_17.Controllers
             }
         }
 
+        public ActionResult Edit2([Bind(Include = "ID,Title,Description,Owner")] Course course)
+        {
+            return View("Edit" ,  course);
+        }
+
 
         // POST: Courses/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
@@ -194,7 +199,7 @@ namespace AWE_Projekt_WS_17.Controllers
             {
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit2", course);
             }
 
             return View(course);
