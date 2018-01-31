@@ -50,25 +50,25 @@ namespace AWE_Projekt_WS_17.Migrations
             var contentGroups = new List<ContentGroup>
             {
                 new ContentGroup {CourseID = 1, Order = 1, Header = "Wirtschaft"},
-                new ContentGroup {CourseID = 2, Order = 2, Header = "Rechnen"},
-                new ContentGroup {CourseID = 3, Order = 1, Header = "Formeln"},
-                new ContentGroup {CourseID = 1, Order = 2, Header = "Programmieren"},
+                new ContentGroup {CourseID = 1, Order = 2, Header = "Rechnen"},
+                new ContentGroup {CourseID = 2, Order = 2, Header = "Programmieren"},
                 new ContentGroup {CourseID = 2, Order = 1, Header = "Algorithmen"},
-                new ContentGroup {CourseID = 3, Order = 2, Header = "Methoden"}
+                new ContentGroup {CourseID = 3, Order = 2, Header = "Methoden"},
+                new ContentGroup {CourseID = 3, Order = 1, Header = "Formeln"}
             };
             contentGroups.ForEach(s => context.ContentGroups.AddOrUpdate(p => p.Header, s));
             context.SaveChanges();
 
             var contentElements = new List<ContentElement>
             {
-                new ContentElement {ContentID = 1, Description ="Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
-                new ContentElement {ContentID = 2, Description ="Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=2},
-                new ContentElement {ContentID = 3, Description ="Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=1},
-                new ContentElement {ContentID = 4, Description ="weiteres Tolles ContentElement im Video-Format", Url ="bluppbluppblupp",TypeID= 1, Order =1},
-                new ContentElement {ContentID = 5, Description ="weiteres Tolles ContentElement im PDF-Format", Url ="blablabla",TypeID=2, Order=1},
-                new ContentElement {ContentID = 6, Description ="weiteres Tolles ContentElement im Text-Format", Url ="uiuiui",TypeID=3, Order=1},
-                new ContentElement {ContentID = 1, Description ="NOCH ein weiteres Tolles ContentElement im PDF-Format", Url ="blululul",TypeID=2, Order=2},
-                new ContentElement {ContentID = 2, Description ="NOCH ein weiteres Tolles ContentElement im Text-Format", Url ="blaaaulul",TypeID=3, Order=1}
+                new ContentElement {ContentID = 1, Description ="Kern des Faches", Url ="https://www.youtube.com/embed/k78OjoJZcVc?start=15",TypeID= 1, Order =1},
+                new ContentElement {ContentID = 2, Description ="Meme", Url ="http://www.mvla.net/view/23112.pdf",TypeID=2, Order=2},
+                new ContentElement {ContentID = 3, Description ="Guter Tipp", Url ="Versuche nicht einzuschlafen!",TypeID=3, Order=1},
+                new ContentElement {ContentID = 4, Description ="Lernhilfe", Url ="https://www.youtube.com/embed/miomuSGoPzI?start=18",TypeID= 1, Order =1},
+                new ContentElement {ContentID = 5, Description ="Prüfungsplan", Url ="https://www.uni-wuerzburg.de/fileadmin/32020000/WiWi-Bach/20172_2_Februar_PPlan_BA_ZR.pdf",TypeID=2, Order=1},
+                new ContentElement {ContentID = 6, Description ="Das schlimmste am Fach", Url ="Neuronale Netzwerke",TypeID=3, Order=1},
+                new ContentElement {ContentID = 6, Description ="Während der Klausur", Url ="https://www.youtube.com/embed/77sS5IuR0Gs",TypeID=1, Order=2},
+                new ContentElement {ContentID = 2, Description ="Zusammenfassung", Url ="Wo schneiden sich Angebots- und Nachfragekurve?",TypeID=3, Order=1}
             };
             contentElements.ForEach(s => context.ContentElements.AddOrUpdate(p => p.Description, s));
             context.SaveChanges();
