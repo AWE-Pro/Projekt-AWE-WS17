@@ -12,14 +12,17 @@
 @Html.DisplayName("Average Rating"):
 @ViewBag.Average<br /><br />
 
-@using (Html.BeginForm("Rating", "Courses", FormMethod.Post))
+@if (list.Count() > 0)
 {
-    @Html.Label("Rating")
-    @Html.DropDownList("Rating", list, "Auswahl")
-    @Html.Hidden("id", id)
-    @Html.Hidden("userid", userid)
+    using (Html.BeginForm("Rating", "Courses", FormMethod.Post))
+    {
+        @Html.Label("Rating")
+        @Html.DropDownList("Rating", list, "Auswahl")
+        @Html.Hidden("id", id)
+        @Html.Hidden("userid", userid)
 
-    <input type="submit" value="Rate" class="btn btn-default" />
+        <input type="submit" value="Rate" class="btn btn-default" />
+    }
 }
 
 <div>
