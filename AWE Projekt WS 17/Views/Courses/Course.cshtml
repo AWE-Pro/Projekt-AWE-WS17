@@ -49,7 +49,19 @@
                     @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Url)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => element.Url)<br /> <hr />
+                    @switch (element.TypeID)
+                    {
+                        case 1:
+                            <iframe type="text/html" width="640" height="385"
+                                    src=@element.Url frameborder="0"></iframe><hr /><br />
+                            break;
+                        case 2:
+                            <a href=element.Url>@element.Url</a><hr /><br />
+                            break;
+                        case 3:
+                            <h3>@element.Url</h3><hr /><br />
+                            break;
+                    }
                 </dd>
             }
 

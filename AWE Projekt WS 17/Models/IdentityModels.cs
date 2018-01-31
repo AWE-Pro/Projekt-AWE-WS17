@@ -103,6 +103,7 @@ namespace AWE_Projekt_WS_17.Models
         [ForeignKey("ContentGroup")]
         public int ContentID { get; set; }
         public string Description { get; set; }
+        [Display(Name ="Content")]
         public string Url { get; set; }
         public int TypeID { get; set; }
         public int Order { get; set; }
