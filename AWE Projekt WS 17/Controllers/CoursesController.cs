@@ -184,7 +184,7 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult Edit2([Bind(Include = "ID,Title,Description,Owner")] Course course)
         {
-            return View("Edit" ,  course);
+            return View("Edit" , course);
         }
 
 
@@ -193,10 +193,27 @@ namespace AWE_Projekt_WS_17.Controllers
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, String tags)
         {
             if (ModelState.IsValid)
             {
+                List<String> allTags = tags.Split(',').ToList<string>();
+                allTags.Reverse();
+
+                for (int i = 0; i < allTags.Count(); i++)
+                {
+                    for (int j = 0; j < db.Tags.ToList().Count(); j++)
+                    {
+                        if (!allTags[i].Equals(db.Tags.ToList()[j].Name)
+                        {
+                            Tag tag = new Tag { Name = allTags[i] };
+                            db.Tags.Add(tag);
+                        }
+                    }
+                }
+
+
+
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Edit2", course);
