@@ -203,14 +203,14 @@ namespace AWE_Projekt_WS_17.Controllers
                 allTags.Reverse();
 
                 List<string> allTagNames = new List<string>();
-                for(int k = 0; k < db.Tags.ToList().Count; k++)
+                for (int k = 0; k < db.Tags.ToList().Count; k++)
                 {
                     allTagNames.Add(db.Tags.ToList()[k].Name);
                 }
 
                 for (int i = 0; i < allTags.Count(); i++)
                 {
-                    if(!allTagNames.Contains("allTags[i]"))
+                    if (!allTagNames.Contains(allTags[i]))
                     {
                         allTagNames.Add(allTags[i]);
                         Tag tag = new Tag { Name = allTags[i] };
@@ -219,13 +219,35 @@ namespace AWE_Projekt_WS_17.Controllers
                 }
 
 
-
                 db.Courses.Add(course);
+                await db.SaveChangesAsync();
+                List<Tag> taglist = new List<Tag>();
+                for (int i = 0; i < db.Tags.Count(); i++)
+                {
+                    for (int k = 0; k < allTags.Count; k++)
+                    {
+                        if (db.Tags.ToList()[i].Name.Equals(allTags[k]))
+                        {
+                            taglist.Add(db.Tags.ToList()[i]);
+                        }
+                    }
+                }
+
+
+                for (int i = 0; i < db.Courses.Count(); i++)
+                {
+                    if (db.Courses.ToList()[i].ID == course.ID)
+                    {
+                        db.Courses.ToList()[i].Tags = taglist;
+                    }
+                }
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Edit2", course);
             }
-
             return View(course);
+
+
         }
 
         // GET: Courses/Edit/5
