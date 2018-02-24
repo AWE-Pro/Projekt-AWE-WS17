@@ -6,7 +6,7 @@
 
 <h2>ContentGroup erstellen</h2>
 
-@using (Html.BeginForm("CreateContentGroup", "Courses", FormMethod.Post))
+@using (Html.BeginForm("ContentGroups", "Courses", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Fortfahren" class="btn btn-default" />
+                @Html.ActionLink("Erstellen", "ContentGroups", new { CourseId = Model.ID })
             </div>
         </div>
     </div>
