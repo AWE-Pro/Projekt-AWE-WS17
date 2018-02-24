@@ -51,7 +51,7 @@ namespace AWE_Projekt_WS_17.Models
         [Display(Name = "Kursname")]
         public string Title { get; set; }
         public string Description { get; set; }
-        public int Owner { get; set; }
+        public string Owner { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<ContentGroup> ContentGroups { get; set; }

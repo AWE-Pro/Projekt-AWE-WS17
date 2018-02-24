@@ -17,9 +17,11 @@ namespace AWE_Projekt_WS_17.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Courses
+        [Authorize]
         public async Task<ActionResult> Index()
         {
-            return View(await db.Courses.ToListAsync());
+            string id = User.Identity.GetUserId();
+            return View(await db.Courses.Where(x => x.Owner.Equals(id)).ToListAsync());
         }
 
         public async Task<ActionResult> ContentGroup(int id)
@@ -62,7 +64,7 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(course);
         }
 
-
+        [Authorize]
         // GET: Courses/Create
         public ActionResult Create()
         {
@@ -79,6 +81,7 @@ namespace AWE_Projekt_WS_17.Controllers
             return Json(await db.Tags.Where(x => x.Name.StartsWith(text)).ToListAsync(), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public ActionResult Course(int CourseId)
         {
             ViewBag.User = User.Identity.GetUserId();
@@ -239,7 +242,7 @@ namespace AWE_Projekt_WS_17.Controllers
                         db.Tags.Add(tag);
                     }
                 }
-
+                course.Owner = User.Identity.GetUserId();
 
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
