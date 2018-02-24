@@ -26,12 +26,13 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public async Task<ActionResult> ContentGroup(int id)
         {
+            ViewBag.ID = id;
             var contentGroups = db.ContentGroups.Include(c => c.Course).Where(x => x.CourseID == id);
             return View(await contentGroups.OrderBy(x => x.Order).ToListAsync());
         }
-        public ActionResult CreateContentGroup()
+        public ActionResult CreateContentGroup(int id)
         {
-            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title");
+            ViewBag.CourseID = id;
             return View();
         }
         [HttpPost]
@@ -45,7 +46,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 return RedirectToAction("ContentGroup", new { id = contentGroup.CourseID });
             }
 
-            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title", contentGroup.CourseID);
+            
             return View(contentGroup);
         }
 
@@ -220,7 +221,6 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, string tags)
         {
-
             if (ModelState.IsValid)
             {
                 tags = Regex.Replace(tags, @"\s+", "");
@@ -273,7 +273,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 return RedirectToAction("ContentGroup", new { id = c[0].ID });
             }
             return View(course);
-            
+
         }
 
 
