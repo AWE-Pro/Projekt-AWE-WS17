@@ -37,34 +37,6 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(course);
         }
 
-        public async Task<ActionResult> ContentGroups(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Course course = await db.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            return View(course);
-        }
-
-        public async Task<ActionResult> CreateContentGroup(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Course course = await db.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            return View(course);
-        }
-
 
         // GET: Courses/Create
         public ActionResult Create()
@@ -212,11 +184,6 @@ namespace AWE_Projekt_WS_17.Controllers
             }
         }
 
-        public ActionResult Edit2([Bind(Include = "ID,Title,Description,Owner")] Course course)
-        {
-            return View("CreateContentGroup");
-        }
-
 
         // POST: Courses/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
@@ -225,7 +192,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, string tags)
         {
-            
+
             if (ModelState.IsValid)
             {
                 tags = Regex.Replace(tags, @"\s+", "");
@@ -274,8 +241,8 @@ namespace AWE_Projekt_WS_17.Controllers
 
                 await db.SaveChangesAsync();
                 List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
-                
-                return RedirectToAction("CreateContentGroup",new { id = c[0].ID });
+
+                return RedirectToAction("CreateContentGroup", new { id = c[0].ID });
             }
             return View(course);
 
