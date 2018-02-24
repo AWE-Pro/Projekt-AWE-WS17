@@ -1,13 +1,10 @@
-﻿
-
-@{
+﻿{
     ViewBag.Title = "CourseContent";
 }
 
 <br />
 
-
-<button class="btn btn-primary" type="submit">new</button>
+<button class="btn btn-primary" id="butt">new</button>
 
 <h2>Course Content</h2>
 
@@ -27,35 +24,39 @@
 </head>
 
 <form>
+    <div id="sections">
+        <div class="section">
+            <div class="container">
+                <div class="form-group col-md-3 test">
+                    <h4>Description and Type</h4>
+                    <label for="inputDescription">Description</label>
+                    <input type="text" class="form-control" id="inputDescription">
+                    <label for="inputType">Type</label>
+                    <select class="form-control" id="inputType">
+                        <option>Video</option>
+                        <option>PDF</option>
+                        <option>Text</option>
+                    </select>
 
-    <div class="container">
-        <div class="form-group col-md-3 test">
-            <h4>Description and Type</h4>
-            <label for="inputDescription">Description</label>
-            <input type="text" class="form-control" id="inputDescription">
-            <label for="inputType">Type</label>
-            <select class="form-control" id="inputType">
-                <option>Video</option>
-                <option>PDF</option>
-                <option>Text</option>
-            </select>
 
+                </div>
+                <div class="form-group col-md-3 test middle">
 
+                    <h4>Value</h4>
+                    <label for="value">Value (e.g. Hyperlink to Videofile)</label>
+                    <input type="url" class="form-control" id="inputUrl">
+
+                </div>
+                <div class="form-group col-md-3 test">
+
+                    <h4>Order</h4>
+                    <label for="order">Select Position of Content</label>
+                    <input type="number" class="form-control" id="inputNumber">
+
+                </div>
+            </div>
         </div>
-        <div class="form-group col-md-3 test middle">
 
-            <h4>Value</h4>
-            <label for="value">Value (e.g. Hyperlink to Videofile)</label>
-            <input type="url" class="form-control" id="inputUrl">
-
-        </div>
-        <div class="form-group col-md-3 test">
-
-            <h4>Order</h4>
-            <label for="order">Select Position of Content</label>
-            <input type="number" class="form-control" id="inputNumber">
-
-        </div>
         <div style="clear:both;"></div>
     </div>
     <div class="form-group">
@@ -66,3 +67,39 @@
 
 
 </form>
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        var template = $('#sections .section:first').clone();
+
+        //define counter
+        var sectionsCount = 1;
+
+        //add new section
+        $('body').on('click', '#butt', function () {
+
+            //increment
+            sectionsCount++;
+
+            //loop through each input
+            var section = template.clone().find(':input').each(function () {
+
+                //set id to store the updated section number
+                var newId = this.id + sectionsCount;
+
+                //update for label
+                $(this).prev().attr('for', newId);
+
+                //update id
+                this.id = newId;
+
+            }).end()
+
+                //inject new section
+                .appendTo('#sections');
+            return false;
+        });
+
+    </script>
+}
