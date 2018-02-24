@@ -22,10 +22,29 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(await db.Courses.ToListAsync());
         }
 
-        public ActionResult ContentGroup(int id)
+        public async Task<ActionResult> ContentGroup(int id)
         {
             var contentGroups = db.ContentGroups.Include(c => c.Course).Where(x => x.CourseID == id);
-            return View(contentGroups.OrderBy(x => x.Order).ToList());
+            return View(await contentGroups.OrderBy(x => x.Order).ToListAsync());
+        }
+        public ActionResult CreateContentGroup()
+        {
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateContentGroup([Bind(Include = "ID,CourseID,Order,Header")] ContentGroup contentGroup)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ContentGroups.Add(contentGroup);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ContentGroup", new { id = contentGroup.CourseID });
+            }
+
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title", contentGroup.CourseID);
+            return View(contentGroup);
         }
 
         // GET: Courses/Details/5
@@ -248,11 +267,10 @@ namespace AWE_Projekt_WS_17.Controllers
                 await db.SaveChangesAsync();
                 List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
 
-                return RedirectToAction("Index", "ContentGroups", new { id = c[0].ID });
+                return RedirectToAction("ContentGroup", new { id = c[0].ID });
             }
             return View(course);
-
-
+            
         }
 
 
