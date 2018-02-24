@@ -3328,6 +3328,7 @@
     <Content Include="Views\ContentGroups\Details.cshtml" />
     <Content Include="Views\ContentGroups\Edit.cshtml" />
     <Content Include="Views\ContentGroups\Index.cshtml" />
+    <Content Include="Views\Courses\ContentGroup.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

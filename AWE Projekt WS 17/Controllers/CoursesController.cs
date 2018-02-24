@@ -22,6 +22,12 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(await db.Courses.ToListAsync());
         }
 
+        public ActionResult ContentGroup(int id)
+        {
+            var contentGroups = db.ContentGroups.Include(c => c.Course).Where(x => x.CourseID == id);
+            return View(contentGroups.OrderBy(x => x.Order).ToList());
+        }
+
         // GET: Courses/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -242,7 +248,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 await db.SaveChangesAsync();
                 List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
 
-                return RedirectToAction("CreateContentGroup", new { id = c[0].ID });
+                return RedirectToAction("Index", "ContentGroups", new { id = c[0].ID });
             }
             return View(course);
 
