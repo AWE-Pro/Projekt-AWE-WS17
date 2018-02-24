@@ -225,7 +225,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, string tags)
         {
-            int courseID = course.ID;
+            
             if (ModelState.IsValid)
             {
                 tags = Regex.Replace(tags, @"\s+", "");
@@ -273,9 +273,9 @@ namespace AWE_Projekt_WS_17.Controllers
                 }
 
                 await db.SaveChangesAsync();
-                //return RedirectToAction("Edit2", course);
-
-                return RedirectToAction("CreateContentGroup", courseID);
+                List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
+                
+                return RedirectToAction("CreateContentGroup",new { id = c[0].ID });
             }
             return View(course);
 
