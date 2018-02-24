@@ -3322,6 +3322,8 @@
     <Content Include="Scripts\kendo\2018.1.117\cultures\kendo.culture.aa-ER.min.js.map" />
     <Content Include="Scripts\kendo\2018.1.117\cultures\kendo.culture.aa-DJ.min.js.map" />
     <Content Include="Views\Courses\Course.cshtml" />
+    <Content Include="Views\Courses\ContentGroups.cshtml" />
+    <Content Include="Views\Courses\CreateContentGroup.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

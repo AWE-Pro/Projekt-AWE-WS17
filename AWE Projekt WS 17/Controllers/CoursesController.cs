@@ -37,6 +37,35 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(course);
         }
 
+        public async Task<ActionResult> ContentGroups(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = await db.Courses.FindAsync(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            return View(course);
+        }
+
+        public async Task<ActionResult> CreateContentGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = await db.Courses.FindAsync(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            return View(course);
+        }
+
+
         // GET: Courses/Create
         public ActionResult Create()
         {
@@ -130,9 +159,9 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(groups);
         }
 
-        public ActionResult Rating(int rating, int id , string userid)
+        public ActionResult Rating(int rating, int id, string userid)
         {
-            
+
             List<Enrollment> entrys = new List<Enrollment>();
             for (int i = 0; i < db.Enrollments.Count(); i++)
             {
@@ -146,15 +175,15 @@ namespace AWE_Projekt_WS_17.Controllers
 
             db.Enrollments.Add(new Enrollment { UserID = userid, CourseID = id, Date = DateTime.Now, Rating = rating });
             db.SaveChanges();
-           /** for (int i = 0; i < db.Enrollments.Count(); i++)
-            {
-                if (db.Enrollments.ToList()[i].Equals(entry))
-                {
-                    db.Enrollments.ToList()[i].Rating = rating;
-                    db.SaveChanges();
-                }
-            }*/
-            
+            /** for (int i = 0; i < db.Enrollments.Count(); i++)
+             {
+                 if (db.Enrollments.ToList()[i].Equals(entry))
+                 {
+                     db.Enrollments.ToList()[i].Rating = rating;
+                     db.SaveChanges();
+                 }
+             }*/
+
             return RedirectToAction("Course", new { CourseId = id });
         }
 
@@ -185,7 +214,7 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult Edit2([Bind(Include = "ID,Title,Description,Owner")] Course course)
         {
-            return View("Edit" , course);
+            return View("CreateContentGroup");
         }
 
 
@@ -196,6 +225,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, string tags)
         {
+            int courseID = course.ID;
             if (ModelState.IsValid)
             {
                 tags = Regex.Replace(tags, @"\s+", "");
@@ -243,12 +273,15 @@ namespace AWE_Projekt_WS_17.Controllers
                 }
 
                 await db.SaveChangesAsync();
-                return RedirectToAction("Edit2", course);
+                //return RedirectToAction("Edit2", course);
+
+                return RedirectToAction("CreateContentGroup", courseID);
             }
             return View(course);
 
 
         }
+
 
         // GET: Courses/Edit/5
         public async Task<ActionResult> Edit(int? id)

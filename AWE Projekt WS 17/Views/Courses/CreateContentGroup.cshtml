@@ -1,0 +1,29 @@
+﻿@model AWE_Projekt_WS_17.Models.Course
+
+@{
+    ViewBag.Title = "CreateContentGroup";
+}
+
+<h2>ContentGroup erstellen</h2>
+
+@using (Html.BeginForm("CreateContentGroup", "Courses", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Header", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="tags" type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Fortfahren" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
