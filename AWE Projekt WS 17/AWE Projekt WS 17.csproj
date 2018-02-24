@@ -194,6 +194,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContentGroupsController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -3331,6 +3332,13 @@
     <Content Include="Scripts\kendo\2018.1.117\cultures\kendo.culture.aa-ER.min.js.map" />
     <Content Include="Scripts\kendo\2018.1.117\cultures\kendo.culture.aa-DJ.min.js.map" />
     <Content Include="Views\Courses\Course.cshtml" />
+    <Content Include="Views\ContentGroups\Create.cshtml" />
+    <Content Include="Views\ContentGroups\Delete.cshtml" />
+    <Content Include="Views\ContentGroups\Details.cshtml" />
+    <Content Include="Views\ContentGroups\Edit.cshtml" />
+    <Content Include="Views\ContentGroups\Index.cshtml" />
+    <Content Include="Views\Courses\ContentGroup.cshtml" />
+    <Content Include="Views\Courses\CreateContentGroup.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

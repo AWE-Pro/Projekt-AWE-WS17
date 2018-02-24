@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using AWE_Projekt_WS_17.Models;
 using Microsoft.AspNet.Identity;
+using System.Text.RegularExpressions;
 
 namespace AWE_Projekt_WS_17.Controllers
 {
@@ -19,6 +20,31 @@ namespace AWE_Projekt_WS_17.Controllers
         public async Task<ActionResult> Index()
         {
             return View(await db.Courses.ToListAsync());
+        }
+
+        public async Task<ActionResult> ContentGroup(int id)
+        {
+            var contentGroups = db.ContentGroups.Include(c => c.Course).Where(x => x.CourseID == id);
+            return View(await contentGroups.OrderBy(x => x.Order).ToListAsync());
+        }
+        public ActionResult CreateContentGroup()
+        {
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateContentGroup([Bind(Include = "ID,CourseID,Order,Header")] ContentGroup contentGroup)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ContentGroups.Add(contentGroup);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ContentGroup", new { id = contentGroup.CourseID });
+            }
+
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title", contentGroup.CourseID);
+            return View(contentGroup);
         }
 
         // GET: Courses/Details/5
@@ -35,6 +61,7 @@ namespace AWE_Projekt_WS_17.Controllers
             }
             return View(course);
         }
+
 
         // GET: Courses/Create
         public ActionResult Create()
@@ -130,9 +157,9 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(groups);
         }
 
-        public ActionResult Rating(int rating, int id , string userid)
+        public ActionResult Rating(int rating, int id, string userid)
         {
-            
+
             List<Enrollment> entrys = new List<Enrollment>();
             for (int i = 0; i < db.Enrollments.Count(); i++)
             {
@@ -146,15 +173,15 @@ namespace AWE_Projekt_WS_17.Controllers
 
             db.Enrollments.Add(new Enrollment { UserID = userid, CourseID = id, Date = DateTime.Now, Rating = rating });
             db.SaveChanges();
-           /** for (int i = 0; i < db.Enrollments.Count(); i++)
-            {
-                if (db.Enrollments.ToList()[i].Equals(entry))
-                {
-                    db.Enrollments.ToList()[i].Rating = rating;
-                    db.SaveChanges();
-                }
-            }*/
-            
+            /** for (int i = 0; i < db.Enrollments.Count(); i++)
+             {
+                 if (db.Enrollments.ToList()[i].Equals(entry))
+                 {
+                     db.Enrollments.ToList()[i].Rating = rating;
+                     db.SaveChanges();
+                 }
+             }*/
+
             return RedirectToAction("Course", new { CourseId = id });
         }
 
@@ -189,17 +216,64 @@ namespace AWE_Projekt_WS_17.Controllers
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, string tags)
         {
+
             if (ModelState.IsValid)
             {
+                tags = Regex.Replace(tags, @"\s+", "");
+                List<string> allTags = tags.Split(',').ToList<string>();
+                allTags.Reverse();
+
+                List<string> allTagNames = new List<string>();
+                for (int k = 0; k < db.Tags.ToList().Count; k++)
+                {
+                    allTagNames.Add(db.Tags.ToList()[k].Name);
+                }
+
+                for (int i = 0; i < allTags.Count(); i++)
+                {
+                    if (!allTagNames.Contains(allTags[i]))
+                    {
+                        allTagNames.Add(allTags[i]);
+                        Tag tag = new Tag { Name = allTags[i] };
+                        db.Tags.Add(tag);
+                    }
+                }
+
+
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+                List<Tag> taglist = new List<Tag>();
+                for (int i = 0; i < db.Tags.Count(); i++)
+                {
+                    for (int k = 0; k < allTags.Count; k++)
+                    {
+                        if (db.Tags.ToList()[i].Name.Equals(allTags[k]))
+                        {
+                            taglist.Add(db.Tags.ToList()[i]);
+                        }
+                    }
+                }
 
+
+                for (int i = 0; i < db.Courses.Count(); i++)
+                {
+                    if (db.Courses.ToList()[i].ID == course.ID)
+                    {
+                        db.Courses.ToList()[i].Tags = taglist;
+                    }
+                }
+
+                await db.SaveChangesAsync();
+                List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
+
+                return RedirectToAction("ContentGroup", new { id = c[0].ID });
+            }
             return View(course);
+            
         }
+
 
         // GET: Courses/Edit/5
         public async Task<ActionResult> Edit(int? id)

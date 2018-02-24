@@ -1,58 +1,107 @@
-﻿@model AWE_Projekt_WS_17.Models.Course
-
-@{
-    ViewBag.Title = "Edit";
+﻿@{
+    ViewBag.Title = "CourseContent";
 }
 
-<h2>Edit</h2>
+<br />
+
+<button class="btn btn-primary" id="butt">new</button>
+
+<h2>Course Content</h2>
+
+<head>
+    <style>
+
+        .test {
+            border: 2px solid black;
+            border-color: #0174DF;
+            height: 200px;
+        }
+
+        .middle {
+            margin: 0px 30px 0px 30px;
+        }
+    </style>
+</head>
+
+<form>
+    <div id="sections">
+        <div class="section">
+            <div class="container">
+                <div class="form-group col-md-3 test">
+                    <h4>Description and Type</h4>
+                    <label for="inputDescription">Description</label>
+                    <input type="text" class="form-control" id="inputDescription">
+                    <label for="inputType">Type</label>
+                    <select class="form-control" id="inputType">
+                        <option>Video</option>
+                        <option>PDF</option>
+                        <option>Text</option>
+                    </select>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Course</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+                </div>
+                <div class="form-group col-md-3 test middle">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    <h4>Value</h4>
+                    <label for="value">Value (e.g. Hyperlink to Videofile)</label>
+                    <input type="url" class="form-control" id="inputUrl">
+
+                </div>
+                <div class="form-group col-md-3 test">
+
+                    <h4>Order</h4>
+                    <label for="order">Select Position of Content</label>
+                    <select class="form-control" id="inputNumber">
+                        <option value="1">1</option>
+                        </select>
+
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-6">
+            <input type="submit" value="Erstellen" class="btn btn-default" />
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+</form>
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        var template = $('#sections .section:first').clone();
+
+        //define counter
+        var sectionsCount = 1;
+
+        //add new section
+        $('body').on('click', '#butt', function () {
+
+            //increment
+            sectionsCount++;
+
+            //loop through each input
+            var section = template.clone().find(':input').each(function () {
+
+                //set id to store the updated section number
+                var newId = this.id + sectionsCount;
+
+                //update for label
+                $(this).prev().attr('for', newId);
+
+                //update id
+                this.id = newId;
+
+            }).end()
+
+                //inject new section
+                .appendTo('#sections');
+            return false;
+        });
+
+    </script>
 }
