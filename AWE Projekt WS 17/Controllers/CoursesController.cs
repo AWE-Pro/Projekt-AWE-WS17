@@ -56,6 +56,7 @@ namespace AWE_Projekt_WS_17.Controllers
         {
             ViewBag.User = User.Identity.GetUserId();
             ViewBag.ID = CourseId;
+            ViewBag.Identifier = CourseId.ToString();
             //Durchschnittliche Wertung
             List<int> average = new List<int>();
             for (int k = 0; k < db.Enrollments.Count(); k++)

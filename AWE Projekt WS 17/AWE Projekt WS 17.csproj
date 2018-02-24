@@ -858,6 +858,14 @@
     <Content Include="Content\kendo\2018.1.117\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2018.1.117\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2018.1.117\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Disqus\Docs\content\images\disqus-logo.png" />
+    <Content Include="Disqus\Docs\content\images\webx-bkg.png" />
+    <Content Include="Disqus\Docs\content\images\webx-content-bkg.jpg" />
+    <Content Include="Disqus\Docs\content\images\webx-icon.png" />
+    <Content Include="Disqus\Docs\content\images\wm-mysite-settings.png" />
+    <Content Include="Disqus\Docs\content\images\wm-site-settings.png" />
+    <Content Include="Disqus\Docs\content\Site.css" />
+    <Content Include="Disqus\Docs\startHere.htm" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1321,6 +1329,7 @@
     <Content Include="Content\kendo\2018.1.117-source\mobile\android\all.less" />
     <Content Include="Content\kendo\2018.1.117-source\mobile\android\actionsheet.less" />
     <Content Include="Content\kendo\2018.1.117-source\common\transitions.less" />
+    <Content Include="App_Code\Disqus.cshtml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

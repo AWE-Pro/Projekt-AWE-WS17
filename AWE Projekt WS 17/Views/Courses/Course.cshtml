@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<AWE_Projekt_WS_17.Models.ContentGroup>
 @{
+    Disqus.Initialize("AWE-Projekt");
+}
+@{
     ViewBag.Title = "Course";
     SelectList list = ViewBag.Rating;
     int id = ViewBag.ID;
+    string identifier = ViewBag.Identifier;
     string userid = ViewBag.User;
 }
+
 
 <h2>Course</h2>
 <h3>@ViewBag.Course</h3><br />
@@ -68,4 +73,6 @@
         }
 
     </dl>
+
 </div>
+@Disqus.ShowComments(@identifier)
