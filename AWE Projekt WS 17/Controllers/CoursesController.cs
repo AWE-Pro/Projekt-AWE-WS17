@@ -268,7 +268,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 }
 
                 await db.SaveChangesAsync();
-                List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
+                List<Course> c = db.Courses.Where(x => x.ID == course.ID).ToList();
 
                 return RedirectToAction("ContentGroup", new { id = c[0].ID });
             }
