@@ -40,46 +40,61 @@
 <div>
     <h4>Content</h4>
     <hr />
-    <dl class="dl-horizontal">
-        @foreach (var item in Model)
-        {
-            <dt>
-                @Html.DisplayNameFor(model => model.Header)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Header) <br /><br />
-            </dd>
-            foreach (var element in item.ContentElements)
-            {
-                <dt>
-                    @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Description)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => element.Description)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Url)
-                </dt>
-                <dd>
-                    @switch (element.TypeID)
-                    {
-                        case 1:
-                            <iframe type="text/html" width="640" height="385"
-                                    src=@element.Url frameborder="0"></iframe><hr /><br />
-                            break;
-                        case 2:
-                            <a href=@element.Url target="_blank">@element.Url</a><hr /><br />
-                            break;
-                        case 3:
-                            <h3>@element.Url</h3><hr /><br />
-                            break;
-                    }
-                </dd>
-            }
 
-        }
 
-    </dl>
+    @foreach (var item in Model)
+    {
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="@item.Header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#@item.ID" aria-expanded="true" aria-controls="@item.ID">
+
+
+                            @Html.DisplayFor(model => item.Header)
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="@item.ID" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+
+                        <dl class="dl-horizontal">
+                            @foreach (var element in item.ContentElements)
+                            {
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Description)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => element.Description)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Url)
+                                </dt>
+                                <dd>
+                                    @switch (element.TypeID)
+                                    {
+                                        case 1:
+                                            <iframe type="text/html" width="640" height="385"
+                                                    src=@element.Url frameborder="0"></iframe><hr /><br />
+                                            break;
+                                        case 2:
+                                            <a href=@element.Url target="_blank">@element.Url</a><hr /><br />
+                                            break;
+                                        case 3:
+                                            <h3>@element.Url</h3><hr /><br />
+                                            break;
+                                    }
+                                </dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
 
 </div>
 @Disqus.ShowComments(@identifier)
