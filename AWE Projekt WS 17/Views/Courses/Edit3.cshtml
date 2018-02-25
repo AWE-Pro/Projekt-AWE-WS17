@@ -1,19 +1,11 @@
 ﻿@model AWE_Projekt_WS_17.Models.ContentGroup
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit3";
     int id = ViewBag.CourseID;
 }
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
-        <li class="breadcrumb-item"><a href="#">Meine Kurse</a></li>
-        <li class="breadcrumb-item"><a href="#">Kurs bearbeiten</a></li>
-        <li class="breadcrumb-item active" aria-current="page">ContentGroup erstellen</li>
-    </ol>
-</nav>
 
-<h2>ContentGroup erstellen</h2>
+<h2>ContentGroup bearbeiten</h2>
 
 
 @using (Html.BeginForm())
@@ -21,11 +13,14 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h4>ContentGroup</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
         <div class="form-group">
             <div class="col-md-10">
-                @Html.Hidden("CourseID", id)
+                @Html.Hidden("CourseID", id, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -39,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Header,  htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Header, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Header, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Header, "", new { @class = "text-danger" })
@@ -48,13 +43,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

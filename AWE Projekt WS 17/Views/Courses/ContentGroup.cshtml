@@ -57,7 +57,8 @@
             </td>
             <td style="text-align: right;">
                 <span class="btn-group" role="group">
-                    @Html.ActionLink("Bearbeiten", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Inhalt", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Bearbeiten", "Edit3", new { id = item.ID }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-default" })
                 </span>
             </td>

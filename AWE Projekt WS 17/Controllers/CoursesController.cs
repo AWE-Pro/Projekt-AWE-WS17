@@ -409,7 +409,36 @@ namespace AWE_Projekt_WS_17.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("ContentGroup", new { id = temp });
         }
-        
+        public async Task<ActionResult> Edit3(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ContentGroup contentGroup = await db.ContentGroups.FindAsync(id);
+            if (contentGroup == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CourseID = contentGroup.CourseID;
+            return View(contentGroup);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit3([Bind(Include = "ID,CourseID,Order,Header")] ContentGroup contentGroup)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(contentGroup).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("ContentGroup", new { id = contentGroup.CourseID });
+            }
+            ViewBag.CourseID =contentGroup.CourseID;
+            return View(contentGroup);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
