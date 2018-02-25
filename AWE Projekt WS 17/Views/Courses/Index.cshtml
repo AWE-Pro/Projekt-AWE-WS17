@@ -48,7 +48,7 @@
     {
         <tr id="bg-color">
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.ActionLink(item.Title, "Course", new { CourseId = item.ID })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
