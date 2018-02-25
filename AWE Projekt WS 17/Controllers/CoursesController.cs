@@ -39,14 +39,14 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateContentGroup([Bind(Include = "ID,CourseID,Order,Header")] ContentGroup contentGroup)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 db.ContentGroups.Add(contentGroup);
                 await db.SaveChangesAsync();
                 return RedirectToAction("ContentGroup", new { id = contentGroup.CourseID });
             }
 
-            
+            ViewBag.CourseID = contentGroup.CourseID;
             return View(contentGroup);
         }
 
@@ -299,6 +299,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Description,Owner")] Course course)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(course).State = EntityState.Modified;
