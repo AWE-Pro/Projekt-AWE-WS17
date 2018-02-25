@@ -332,6 +332,20 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(course);
         }
 
+        public async Task<ActionResult> DeleteContentGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ContentGroup contentGroup = await db.ContentGroups.FindAsync(id);
+            if (contentGroup == null)
+            {
+                return HttpNotFound();
+            }
+            return View(contentGroup);
+        }
+
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -339,6 +353,14 @@ namespace AWE_Projekt_WS_17.Controllers
         {
             Course course = await db.Courses.FindAsync(id);
             db.Courses.Remove(course);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> DeleteContentGroupConfirmed(int id)
+        {
+            ContentGroup contentGroup = await db.ContentGroups.FindAsync(id);
+            db.ContentGroups.Remove(contentGroup);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

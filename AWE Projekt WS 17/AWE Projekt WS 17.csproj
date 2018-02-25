@@ -3345,6 +3345,7 @@
     <Content Include="Views\ContentElements\Details.cshtml" />
     <Content Include="Views\ContentElements\Edit.cshtml" />
     <Content Include="Views\ContentElements\Index.cshtml" />
+    <Content Include="Views\Courses\DeleteContentGroup.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

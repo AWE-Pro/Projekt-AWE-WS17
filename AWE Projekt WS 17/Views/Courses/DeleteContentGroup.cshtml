@@ -1,0 +1,38 @@
+﻿@model AWE_Projekt_WS_17.Models.ContentGroup
+
+@{
+    ViewBag.Title = "Delete";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item"><a href="#">Meine Kurse</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ContentGroup löschen</li>
+    </ol>
+</nav>
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ContentGroup</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Header)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Header)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm("DeleteContentGroupConfirmed", "Courses", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
