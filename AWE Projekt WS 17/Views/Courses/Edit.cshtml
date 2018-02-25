@@ -99,11 +99,11 @@
                     <select class="form-control drop" id="dropdown">
                         @if (counter >= 2)
                         {
-                        <option value = @counter>@counter</option>
+                            <option value=@counter>@counter</option>
                         }
                         else
                         {
-                        <option value= 1 >1</option>
+                            <option value=1>1</option>
                         }
                     </select>
 
@@ -112,7 +112,7 @@
         </div>
         <div style="clear:both;"></div>
     </div>
-
+             <input type="hidden" value="@id" id="contentId" />
     <div class="form-group">
         <div class="col-md-offset-4 col-md-6">
             <input type="submit" value="Erstellen" class="btn btn-default" />
@@ -131,39 +131,42 @@
         var sectionsCount = 1;
         $alpha = $("#dropdown");
 
-        //add new section
-        $('body').on('click', '#butt', function () {
 
-            //increment
-            sectionsCount++;
+            //add new section
+            $('body').on('click', '#butt', function () {
+                if (sectionsCount < 10) {
+                    //increment
+                    sectionsCount++;
 
-            //loop through each input
-            var section = template.clone().find(':input').each(function () {
+                    //loop through each input
+                    var section = template.clone().find(':input').each(function () {
 
-                //set id to store the updated section number
-                var newId = this.id + sectionsCount;
+                        //set id to store the updated section number
+                        var newId = this.id + sectionsCount;
 
-                //update for label
-                $(this).prev().attr('for', newId);
+                        //update for label
+                        $(this).prev().attr('for', newId);
 
-                //update id
-                this.id = newId;
+                        //update id
+                        this.id = newId;
 
-            }).end()
+                    }).end()
 
-                //inject new section
-                .appendTo('#sections');
-            var count = @counter + sectionsCount;
-                $('.drop')
-                    .find('option')
-                    .remove()
-                    .end()
+                        //inject new section
+                        .appendTo('#sections');
+                    var count = @counter + sectionsCount;
+                    $('.drop')
+                        .find('option')
+                        .remove()
+                        .end()
 
-                for (var i = @counter; i < count; i++) {
-                    $('<option value="' + i + '">' + i + '</option>').appendTo('.drop');
+                    for (var i = @counter; i < count; i++) {
+                        $('<option value="' + i + '">' + i + '</option>').appendTo('.drop');
+                    }
+
+                    return false;
                 }
+            });
 
-            return false;
-        });
     </script>
 }
