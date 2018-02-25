@@ -279,7 +279,7 @@ namespace AWE_Projekt_WS_17.Controllers
 
 
         // GET: Courses/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit8(int? id)
         {
             if (id == null)
             {
@@ -291,6 +291,12 @@ namespace AWE_Projekt_WS_17.Controllers
                 return HttpNotFound();
             }
             return View(course);
+        }
+
+        public async Task<ActionResult> Edit(int id)
+        {
+            ViewBag.ContentID = id;
+            return View(await db.ContentElements.Where(x => x.ContentID.Equals(id)).ToListAsync());
         }
 
         // POST: Courses/Edit/5
