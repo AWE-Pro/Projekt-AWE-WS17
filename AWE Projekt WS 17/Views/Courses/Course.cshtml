@@ -40,15 +40,17 @@
 </div>
 @if (list.Count() > 0)
 {
-    using (Html.BeginForm("Rating", "Courses", FormMethod.Post))
-    {
-        @Html.Label("Rating")
-        @Html.DropDownList("Rating", list, "Auswahl")
-        @Html.Hidden("id", id)
-        @Html.Hidden("userid", userid)
+    <div style="text-align: right;">
+        @using (Html.BeginForm("Rating", "Courses", FormMethod.Post))
+        {
+            @Html.Label("Rating")
+            @Html.DropDownList("Rating", list, "Auswahl")
+            @Html.Hidden("id", id)
+            @Html.Hidden("userid", userid)
 
-        <input type="submit" value="Rate" class="btn btn-default" />
-    }
+            <input type="submit" value="Rate" class="btn btn-default" />
+        }
+    </div>
 }
 <div style="padding-bottom: 100px;">
     <h4>Content</h4>

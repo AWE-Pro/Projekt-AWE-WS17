@@ -12,12 +12,10 @@
 
 
 <h2>Suche</h2>
-<p>
-    @Html.ActionLink("Startseite", "Index", "Home")
-</p>
+
 @using (Html.BeginForm("SearchResult", "Courses", FormMethod.Post))
 {
-    <div class="form-horizontal">
+    <div class="form-horizontal" style="margin-bottom: 100px;">
         <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })

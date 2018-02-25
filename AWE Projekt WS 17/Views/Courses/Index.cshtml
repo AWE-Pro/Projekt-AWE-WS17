@@ -3,18 +3,35 @@
 @{
     ViewBag.Title = "Index";
 }
+
+<style>
+    th {
+        font-size: 1.25em;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0 0.5em;
+    }
+
+    #bg-color {
+        background-color: #E6E6E6;
+    }
+</style>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Startseite</a></li>
         <li class="breadcrumb-item active" aria-current="page">Meine Kurse</li>
     </ol>
 </nav>
+
 <h2>Meine Kurse</h2>
 
-<p>
+<p style="text-align: right; padding-right: 1%;">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" style="margin-bottom: 100px;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -27,7 +44,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="bg-color">
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
