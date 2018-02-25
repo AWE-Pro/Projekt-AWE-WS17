@@ -132,16 +132,16 @@
         $alpha = $("#dropdown");
 
 
-            //add new section
+            //neue Section hinzufügen
             $('body').on('click', '#butt', function () {
                 if (sectionsCount < 10) {
-                    //increment
+                    //counter erhöhen
                     sectionsCount++;
 
-                    //loop through each input
+                    //schleife durch jeden input
                     var section = template.clone().find(':input').each(function () {
 
-                        //set id to store the updated section number
+                        //neue id mit updated counter 
                         var newId = this.id + sectionsCount;
 
                         //update for label
@@ -152,14 +152,15 @@
 
                     }).end()
 
-                        //inject new section
+                        //iniiziere neue sektion
                         .appendTo('#sections');
                     var count = @counter + sectionsCount;
+                    //lösche dropdown
                     $('.drop')
                         .find('option')
                         .remove()
                         .end()
-
+                    //fülle dropdown
                     for (var i = @counter; i < count; i++) {
                         $('<option value="' + i + '">' + i + '</option>').appendTo('.drop');
                     }
