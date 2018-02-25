@@ -82,7 +82,6 @@
                         <option>PDF</option>
                         <option>Text</option>
                     </select>
-
                 </div>
                 <div class="form-group col-md-3 test middle">
 
@@ -96,7 +95,7 @@
 
                     <h4>Order</h4>
                     <label for="order">Select Position of Content</label>
-                    <select class="form-control drop" id="dropdown">
+                    <select class="form-control drop" id="inputOrder">
                         @if (counter >= 2)
                         {
                             <option value=@counter>@counter</option>
@@ -129,7 +128,7 @@
 
         //define counter
         var sectionsCount = 1;
-        $alpha = $("#dropdown");
+        $alpha = $("#inputOrder");
 
 
             //neue Section hinzufügen
@@ -152,7 +151,7 @@
 
                     }).end()
 
-                        //iniiziere neue sektion
+                        //initiiere neue sektion
                         .appendTo('#sections');
                     var count = @counter + sectionsCount;
                     //lösche dropdown
