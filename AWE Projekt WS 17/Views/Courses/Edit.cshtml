@@ -4,6 +4,7 @@
 }
 @{
     int id = ViewBag.ContentID;
+    int counter = ViewBag.Counter;
 }
 <table class="table">
     <tr>
@@ -96,7 +97,9 @@
                     <h4>Order</h4>
                     <label for="order">Select Position of Content</label>
                     <select class="form-control drop" id="dropdown">
-                        <option value="1">1</option>
+                        @for (int i = 1; i <= @counter+1; i++) {
+                        <option value = @i>@i</option>
+                        }
                     </select>
 
                 </div>
@@ -145,14 +148,14 @@
 
                 //inject new section
                 .appendTo('#sections');
-
-            for (var j = 1; j <= sectionsCount; j++) {
+            var gay = @counter + sectionsCount;
+            for (var j = 1; j <= gay; j++) {
                 $('.drop')
                     .find('option')
                     .remove()
                     .end()
 
-                for (var i = 1; i <= sectionsCount; i++) {
+                for (var i = 1; i <= gay; i++) {
                     $('<option value="' + i + '">' + i + '</option>').appendTo('.drop');
                 }
             }

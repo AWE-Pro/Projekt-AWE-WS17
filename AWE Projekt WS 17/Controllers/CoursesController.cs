@@ -296,6 +296,7 @@ namespace AWE_Projekt_WS_17.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             ViewBag.ContentID = id;
+            ViewBag.Counter = db.ContentElements.Where(x => x.ContentID.Equals(id)).Count();
             return View(await db.ContentElements.Where(x => x.ContentID.Equals(id)).ToListAsync());
         }
 
