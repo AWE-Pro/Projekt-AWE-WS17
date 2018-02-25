@@ -6,6 +6,31 @@
     int id = ViewBag.ContentID;
     int counter = ViewBag.Counter + 1;
 }
+<style>
+
+    .test {
+        border: 2px solid black;
+        border-color: #0174DF;
+        height: 200px;
+    }
+
+    .middle {
+        margin: 0px 30px 0px 30px;
+    }
+
+    th {
+        font-size: 1.25em;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0 0.5em;
+    }
+
+    #bg-color {
+        background-color: #E6E6E6;
+    }
+</style>
 @if (counter >= 2)
 {
 <table class="table">
@@ -27,7 +52,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="bg-color">
             <td>
                 @Html.DisplayFor(modelItem => item.Type.Name)
             </td>
@@ -41,7 +66,7 @@
                 @Html.DisplayFor(modelItem => item.Order)
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Löschen", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
             </td>
         </tr>
     }
@@ -50,52 +75,39 @@
 }
 <br />
 
-<button class="btn btn-primary" id="butt">new</button>
+<button class="btn btn-primary" id="butt">Neue Inhaltsgruppe</button>
 
-<h2>Course Content</h2>
+<h2>Kursinhalt</h2>
 
-<style>
-
-    .test {
-        border: 2px solid black;
-        border-color: #0174DF;
-        height: 200px;
-    }
-
-    .middle {
-        margin: 0px 30px 0px 30px;
-    }
-</style>
-
-<form>
+@using (Html.BeginForm("CreateContentElement", "Courses", FormMethod.Get)) {
     <div id="sections">
         <div class="section">
             <div class="container">
 
                 <div class="form-group col-md-3 test">
-                    <h4>Description and Type</h4>
+                    <h4>Bescheibung und Typ</h4>
                     <label for="inputDescription">Description</label>
-                    <input type="text" class="form-control" id="inputDescription">
-                    <label for="inputType">Type</label>
-                    <select class="form-control" id="inputType">
-                        <option>Video</option>
-                        <option>PDF</option>
-                        <option>Text</option>
+                    <input type="text" class="form-control" name="inputDescription" id="inputDescription">
+                    <label for="inputType">Typ</label>
+                    <select class="form-control" name="inputType" id="inputType">
+                        <option value="1">Video</option>
+                        <option value="2">PDF</option>
+                        <option value="3">Text</option>
                     </select>
                 </div>
                 <div class="form-group col-md-3 test middle">
 
-                    <h4>Value</h4>
+                    <h4>Wert</h4>
                     <label for="value">Value (e.g. Hyperlink to Videofile)</label>
-                    <input type="text" class="form-control" id="inputUrl">
+                    <input type="text" class="form-control" name="inputUrl" id="inputUrl">
 
                 </div>
 
                 <div class="form-group col-md-3 test">
 
-                    <h4>Order</h4>
-                    <label for="order">Select Position of Content</label>
-                    <select class="form-control drop" id="inputOrder">
+                    <h4>Rang</h4>
+                    <label for="order">Position des Inhalts</label>
+                    <select class="form-control drop" name="inputOrder" id="inputOrder">
                         @if (counter >= 2)
                         {
                             <option value=@counter>@counter</option>
@@ -111,14 +123,14 @@
         </div>
         <div style="clear:both;"></div>
     </div>
-             <input type="hidden" value="@id" id="contentId" />
+             <input type="hidden" value="@id" name="contentId" id="contentId" />
     <div class="form-group">
         <div class="col-md-offset-4 col-md-6">
             <input type="submit" value="Erstellen" class="btn btn-default" />
         </div>
     </div>
 
-</form>
+}
 
 @section scripts {
     <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
@@ -131,7 +143,7 @@
 
             //neue Section hinzufügen
             $('body').on('click', '#butt', function () {
-                if (sectionsCount < 10) {
+                
                     //counter erhöhen
                     sectionsCount++;
 
@@ -163,7 +175,7 @@
                     }
 
                     return false;
-                }
+                
             });
 
     </script>

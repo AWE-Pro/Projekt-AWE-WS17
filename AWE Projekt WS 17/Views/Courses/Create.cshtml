@@ -9,11 +9,13 @@
         <li class="breadcrumb-item active" aria-current="page">Kurs anlegen</li>
     </ol>
 </nav>
-<h2>Kurs anlegen</h2>
 
-<div style="text-align: right;">
-    @Html.ActionLink("Meine Kurse", "Index")
-</div>
+<h2 style="padding-bottom: 30px;">
+    Kurs anlegen
+    <span style="float: none; padding-left: 5%;">
+        @Html.ActionLink("Meine Kurse", "Index", null, new { @class = "btn btn-default" })
+    </span>
+</h2>
 
 @using (Html.BeginForm("Create", "Courses", FormMethod.Post))
 {

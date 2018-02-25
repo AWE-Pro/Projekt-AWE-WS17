@@ -192,6 +192,7 @@ namespace AWE_Projekt_WS_17.Controllers
 
         public ActionResult SearchResult(Tag tagname)
         {
+
             List<Course> Courses = new List<Course>();
             if (tagname != null)
             {
@@ -206,12 +207,36 @@ namespace AWE_Projekt_WS_17.Controllers
 
                     }
                 }
-                return View(Courses);
             }
-            else
+            return View(Courses);
+            
+        }
+
+        public ActionResult CreateContentElement(String[] inputDescription, int[] inputType, String[] inputUrl, int[] inputOrder, int contentid)
+        {
+            if(inputDescription == null || inputType == null || inputUrl == null || inputOrder == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ContentGroup cG = db.ContentGroups.Find(contentid);
+
+            // Content auslesen und erstelen
+            for (int i=0; i < inputDescription.Length; i++)
             {
-                return View(Courses);
+                ContentElement cE = new ContentElement();
+                cE.Description = inputDescription[i];
+                cE.TypeID = inputType[i];
+                cE.Url = inputUrl[i];
+                cE.Order = inputOrder[i];
+                cE.ContentID = contentid;
+
+                cG.ContentElements.Add(cE);
+               
             }
+            db.SaveChanges();
+            int courseID = cG.CourseID;
+
+                return RedirectToAction("Course", new { courseID });
         }
 
 

@@ -27,11 +27,13 @@
     </ol>
 </nav>
 
-<h2>Content Groups</h2>
+<h2 style="padding-bottom: 30px;">
+    ContentGroups
+    <span style="float: none; padding-left: 5%;">
+        @Html.ActionLink("Neu erstellen", "CreateContentGroup", new { id = ViewBag.ID }, new { @class = "btn btn-default" })
+    </span>
+</h2>
 
-<p style="text-align: right; padding-right: 1%;">
-    @Html.ActionLink("Create New", "CreateContentGroup", new { id = ViewBag.ID })
-</p>
 <table class="table">
     <tr>
 
@@ -54,8 +56,8 @@
                 @Html.DisplayFor(modelItem => item.Header)
             </td>
             <td style="text-align: right;">
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "DeleteContentGroup", new { id = item.ID })
+                @Html.ActionLink("Bearbeiten", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-default" })
             </td>
         </tr>
     }

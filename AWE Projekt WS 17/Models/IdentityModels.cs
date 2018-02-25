@@ -50,6 +50,7 @@ namespace AWE_Projekt_WS_17.Models
         public int ID { get; set; }
         [Display(Name = "Kursname")]
         public string Title { get; set; }
+        [Display(Name = "Beschreibung")]
         public string Description { get; set; }
         public string Owner { get; set; }
 
@@ -91,7 +92,9 @@ namespace AWE_Projekt_WS_17.Models
     {
         public int ID { get; set; }
         public int CourseID { get; set; }
+        [Display(Name = "Rang")]
         public int Order { get; set; }
+        [Display(Name = "Titel")]
         public string Header { get; set; }
 
         public virtual Course Course { get; set; }
