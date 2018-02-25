@@ -9,6 +9,21 @@
     string identifier = ViewBag.Identifier;
     string userid = ViewBag.User;
 }
+
+<style>
+    .card-header
+    {
+        background-color: #E6E6E6;
+    }
+
+    .card-header button
+    {
+        color: black;
+    }
+</style>
+
+
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Startseite</a></li>
@@ -19,12 +34,12 @@
 </nav>
 
 
-<h2>Course</h2>
-<h3>@ViewBag.Course</h3><br />
+<h2>@ViewBag.Course</h2><br />
 
-@Html.DisplayName("Average Rating"):
-@ViewBag.Average<br /><br />
-
+<div style="text-align: right;">
+    @Html.DisplayName("Average Rating"):
+    @ViewBag.Average<br /><br />
+</div>
 @if (list.Count() > 0)
 {
     using (Html.BeginForm("Rating", "Courses", FormMethod.Post))
@@ -33,11 +48,11 @@
         @Html.DropDownList("Rating", list, "Auswahl")
         @Html.Hidden("id", id)
         @Html.Hidden("userid", userid)
-
+        
         <input type="submit" value="Rate" class="btn btn-default" />
     }
 }
-<div>
+<div style="padding-bottom: 100px;">
     <h4>Content</h4>
     <hr />
 
