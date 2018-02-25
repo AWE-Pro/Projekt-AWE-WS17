@@ -384,6 +384,7 @@ namespace AWE_Projekt_WS_17.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ID = contentGroup.CourseID;    
             return View(contentGroup);
         }
 
@@ -436,6 +437,32 @@ namespace AWE_Projekt_WS_17.Controllers
             }
             ViewBag.CourseID =contentGroup.CourseID;
             return View(contentGroup);
+        }
+
+        public async Task<ActionResult> DeleteElement(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ContentElement contentElement = await db.ContentElements.FindAsync(id);
+            if (contentElement == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ID = contentElement.ContentID;
+            return View(contentElement);
+        }
+
+        [HttpPost, ActionName("DeleteElement")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmedElement(int id)
+        {
+            ContentElement contentElement = await db.ContentElements.FindAsync(id);
+            int ID = contentElement.ContentID;
+            db.ContentElements.Remove(contentElement);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Edit", new { id = ID});
         }
 
 
