@@ -104,7 +104,7 @@ namespace AWE_Projekt_WS_17.Controllers
             }
             else
             {
-                ViewBag.Average = "Not enough Ratings yet!";
+                ViewBag.Average = "Noch nicht genügend Wertungen!";
             }
 
 
