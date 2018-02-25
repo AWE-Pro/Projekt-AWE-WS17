@@ -93,6 +93,7 @@ namespace AWE_Projekt_WS_17.Models
         public int ID { get; set; }
         public int CourseID { get; set; }
         [Display(Name = "Rang")]
+        [Range (1, 100)]
         public int Order { get; set; }
         [Display(Name = "Titel")]
         public string Header { get; set; }
