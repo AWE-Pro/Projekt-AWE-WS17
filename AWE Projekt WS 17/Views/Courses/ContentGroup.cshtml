@@ -3,6 +3,22 @@
 @{
     ViewBag.Title = "ContentGroups";
 }
+
+<style>
+    th {
+        font-size: 1.25em;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0 0.5em;
+    }
+
+    #bg-color {
+        background-color: #E6E6E6;
+    }
+</style>
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Startseite</a></li>
@@ -13,7 +29,7 @@
 
 <h2>Content Groups</h2>
 
-<p>
+<p style="text-align: right; padding-right: 1%;">
     @Html.ActionLink("Create New", "CreateContentGroup", new { id = ViewBag.ID })
 </p>
 <table class="table">
@@ -30,15 +46,14 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-
+        <tr id="bg-color">
             <td>
                 @Html.DisplayFor(modelItem => item.Order)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Header)
             </td>
-            <td>
+            <td style="text-align: right;">
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>
