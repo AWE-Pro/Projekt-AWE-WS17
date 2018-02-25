@@ -17,33 +17,36 @@ namespace AWE_Projekt_WS_17.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Courses
+        [Authorize]
         public async Task<ActionResult> Index()
         {
-            return View(await db.Courses.ToListAsync());
+            string id = User.Identity.GetUserId();
+            return View(await db.Courses.Where(x => x.Owner.Equals(id)).ToListAsync());
         }
 
         public async Task<ActionResult> ContentGroup(int id)
         {
+            ViewBag.ID = id;
             var contentGroups = db.ContentGroups.Include(c => c.Course).Where(x => x.CourseID == id);
             return View(await contentGroups.OrderBy(x => x.Order).ToListAsync());
         }
-        public ActionResult CreateContentGroup()
+        public ActionResult CreateContentGroup(int id)
         {
-            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title");
+            ViewBag.CourseID = id;
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateContentGroup([Bind(Include = "ID,CourseID,Order,Header")] ContentGroup contentGroup)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 db.ContentGroups.Add(contentGroup);
                 await db.SaveChangesAsync();
                 return RedirectToAction("ContentGroup", new { id = contentGroup.CourseID });
             }
 
-            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Title", contentGroup.CourseID);
+            ViewBag.CourseID = contentGroup.CourseID;
             return View(contentGroup);
         }
 
@@ -62,7 +65,7 @@ namespace AWE_Projekt_WS_17.Controllers
             return View(course);
         }
 
-
+        [Authorize]
         // GET: Courses/Create
         public ActionResult Create()
         {
@@ -79,6 +82,7 @@ namespace AWE_Projekt_WS_17.Controllers
             return Json(await db.Tags.Where(x => x.Name.StartsWith(text)).ToListAsync(), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public ActionResult Course(int CourseId)
         {
             ViewBag.User = User.Identity.GetUserId();
@@ -218,7 +222,6 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Title,Description,Owner")] Course course, string tags)
         {
-
             if (ModelState.IsValid)
             {
                 tags = Regex.Replace(tags, @"\s+", "");
@@ -240,7 +243,7 @@ namespace AWE_Projekt_WS_17.Controllers
                         db.Tags.Add(tag);
                     }
                 }
-
+                course.Owner = User.Identity.GetUserId();
 
                 db.Courses.Add(course);
                 await db.SaveChangesAsync();
@@ -266,12 +269,12 @@ namespace AWE_Projekt_WS_17.Controllers
                 }
 
                 await db.SaveChangesAsync();
-                List<Course> c = db.Courses.Where(x => x.Title.Equals(course.Title) && x.Description.Equals(course.Description)).ToList();
+                List<Course> c = db.Courses.Where(x => x.ID == course.ID).ToList();
 
                 return RedirectToAction("ContentGroup", new { id = c[0].ID });
             }
             return View(course);
-            
+
         }
 
 
@@ -297,6 +300,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Description,Owner")] Course course)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(course).State = EntityState.Modified;

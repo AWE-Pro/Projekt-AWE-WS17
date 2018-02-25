@@ -3,11 +3,18 @@
 @{
     ViewBag.Title = "ContentGroups";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item"><a href="#">Meine Kurse</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Kurs bearbeiten</li>
+    </ol>
+</nav>
 
 <h2>Content Groups</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateContentGroup")
+    @Html.ActionLink("Create New", "CreateContentGroup", new { id = ViewBag.ID })
 </p>
 <table class="table">
     <tr>

@@ -19,9 +19,9 @@ namespace AWE_Projekt_WS_17.Migrations
         {
             var courses = new List<Course>
             {
-                new Course { Title = "Volkswirtschaftslehre", Description = "Angebot und Nachfrage", Owner = 1 },
-                new Course { Title = "Algorithmen und Datenstrukturen", Description = "Programmier Basics Java", Owner = 2 },
-                new Course { Title = "Data Mining", Description = "Mining Methoden und Neuronale Netzwerke", Owner = 3 }
+                new Course { Title = "Volkswirtschaftslehre", Description = "Angebot und Nachfrage", Owner = "testperson" },
+                new Course { Title = "Algorithmen und Datenstrukturen", Description = "Programmier Basics Java", Owner = "testperson2" },
+                new Course { Title = "Data Mining", Description = "Mining Methoden und Neuronale Netzwerke", Owner = "testperson3"  }
             };
             courses.ForEach(s => context.Courses.AddOrUpdate(p => p.Title, s));
             context.SaveChanges();
@@ -45,7 +45,7 @@ namespace AWE_Projekt_WS_17.Migrations
             types.ForEach(s => context.Types.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
 
-            
+
 
             var contentGroups = new List<ContentGroup>
             {
