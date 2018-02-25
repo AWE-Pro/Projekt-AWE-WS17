@@ -56,8 +56,10 @@
                 @Html.DisplayFor(modelItem => item.Header)
             </td>
             <td style="text-align: right;">
-                @Html.ActionLink("Bearbeiten", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
-                @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-default" })
+                <span class="btn-group" role="group">
+                    @Html.ActionLink("Bearbeiten", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-default" })
+                </span>
             </td>
         </tr>
     }
