@@ -4,6 +4,13 @@
     string id = ViewBag.ID;
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Kurs bearbeiten</li>
+    </ol>
+</nav>
+
 <h2>Kurs bearbeiten</h2>
 
 
@@ -42,14 +49,14 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Speichern" class="btn btn-primary" />
+            <input type="submit" value="Speichern" class="btn btn-primary" style="background-color: #0080FF"/>
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Zurück", "Index", null, new { @class="btn btn-primary"})
+    @Html.ActionLink("Zurück", "Index", null, new { @class="btn btn-primary", @style = "background-color: #0080FF" })
 </div>
 
 @section Scripts {

@@ -5,9 +5,9 @@
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
-        <li class="breadcrumb-item"><a href="#">Meine Kurse</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Kurs löschen</li>
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Meine Kurse</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Kurs löschen</li>
     </ol>
 </nav>
 <h2>Löschen</h2>
@@ -42,8 +42,8 @@
 
         <div class="form-actions no-color">
             <span class="btn-group" role="group">
-                <input type="submit" value="Löschen" class="btn btn-primary" />
-                @Html.ActionLink("Zurück", "Index", null, new { @class = "btn btn-primary" })
+                <input type="submit" value="Löschen" class="btn btn-primary" style="background-color: #0080FF;"/>
+                @Html.ActionLink("Zurück", "Index", null, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
             </span>
         </div>
     }

@@ -5,15 +5,15 @@
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Kurs anlegen</li>
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Kurs anlegen</li>
     </ol>
 </nav>
 
 <h2 style="padding-bottom: 30px;">
     Kurs anlegen
     <span style="float: none; padding-left: 5%;">
-        @Html.ActionLink("Meine Kurse", "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Meine Kurse", "Index", null, new { @class = "btn btn-primary", @style = "background-color: #0080FF"})
     </span>
 </h2>
 
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Fortfahren" class="btn btn-primary" />
+                <input type="submit" value="Fortfahren" class="btn btn-primary" style="background-color: #0080FF;"/>
             </div>
         </div>
     </div>

@@ -1,13 +1,21 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .navbar {
+            background-color: #0080FF;
+        }
 
+        .navbar-nav li {
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,15 +26,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("EZCourse", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("EZCourse", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color: white;" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                   
-                    <li>@Html.ActionLink("Kurse suchen", "Search", "Courses")</li>
-                    <li>@Html.ActionLink("Kurse anlegen", "Create", "Courses")</li>
-                    <li>@Html.ActionLink("Meine Kurse", "Index", "Courses")</li>
-                    
+                <ul class="nav navbar-nav" style="color: white;">
+
+
+
+                    <li>@Html.ActionLink("Kurse suchen", "Search", "Courses", null, new { @style = "color: white;" })</li>
+                    <li>@Html.ActionLink("Kurse anlegen", "Create", "Courses", null, new { @style = "color: white;" })</li>
+                    <li>@Html.ActionLink("Meine Kurse", "Index", "Courses", null, new { @style = "color: white;" })</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -17,20 +17,24 @@
     #bg-color {
         background-color: #E6E6E6;
     }
+    .breadcrumb li
+    {
+         color: #0080FF;
+    }
 </style>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
-        <li class="breadcrumb-item"><a href="#">Meine Kurse</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Kurs bearbeiten</li>
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Meine Kurse</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Kurs bearbeiten</li>
     </ol>
 </nav>
 
 <h2 style="padding-bottom: 30px;">
     ContentGroups
     <span style="float: none; padding-left: 5%;">
-        @Html.ActionLink("Neu erstellen", "CreateContentGroup", new { id = ViewBag.ID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Neu erstellen", "CreateContentGroup", new { id = ViewBag.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
     </span>
 </h2>
 
@@ -57,13 +61,13 @@
             </td>
             <td style="text-align: right;">
                 <span class="btn-group" role="group">
-                    @Html.ActionLink("Inhalt", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Bearbeiten", "Edit3", new { id = item.ID }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Inhalt", "Edit", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
+                    @Html.ActionLink("Bearbeiten", "Edit3", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
+                    @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
                 </span>
             </td>
         </tr>
     }
 </table>
-@Html.ActionLink("Zurück", "Index", null,  new { @class = "btn btn-primary" })
+@Html.ActionLink("Zurück", "Index", null,  new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
 

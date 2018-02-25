@@ -5,6 +5,13 @@
     int ID = ViewBag.ID;
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" style="color: #0080FF;"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Inhalt löschen</li>
+    </ol>
+</nav>
+
 <h2>Element löschen</h2>
 
 <h3>Sind Sie sicher, dass Sie löschen wollen?</h3>
@@ -60,8 +67,8 @@
 
         <div class="form-actions no-color">
             <span class="btn-group" role="group">
-                <input type="submit" value="Löschen" class="btn btn-primary" />
-                @Html.ActionLink("Zurück", "Edit", new { id = ID }, new { @class = "btn btn-primary" })
+                <input type="submit" value="Löschen" class="btn btn-primary" style="background-color: #0080FF;"/>
+                @Html.ActionLink("Zurück", "Edit", new { id = ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
             </span>
         </div>
     }

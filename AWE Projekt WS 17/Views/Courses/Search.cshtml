@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "Suche";
 }
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Kurssuche</li>
+        <li class="breadcrumb-item"><a href="#" style="color: #0080FF;">Startseite</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Kurssuche</li>
     </ol>
 </nav>
 
@@ -19,7 +20,7 @@
         <div class="col-lg-6">
             <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Suchen!</button>
+                    <button class="btn btn-primary" type="submit" style="background-color: #0080FF;">Suchen!</button>
                 </span>
                 @Html.EditorFor(model => model.Name)
             </div>

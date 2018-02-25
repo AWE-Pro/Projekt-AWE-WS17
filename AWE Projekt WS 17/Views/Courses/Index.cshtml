@@ -22,14 +22,14 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Startseite</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Meine Kurse</li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: #0080FF;">Meine Kurse</li>
     </ol>
 </nav>
 
 <h2 style="padding-bottom: 30px;">
     Meine Kurse
     <span style="float: none; padding-left: 5%;">
-        @Html.ActionLink("Neu erstellen", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Neu erstellen", "Create", null, new { @class = "btn btn-primary", @style = "background-color: #0080FF;" })
     </span>
 </h2>
 
@@ -55,9 +55,9 @@
             </td>
             <td style="text-align: right;">
                 <span class="btn-group" role="group">
-                    @Html.ActionLink("Inhalt", "ContentGroup", new { id = item.ID }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Bearbeiten", "Edit2", new { id = item.ID }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Löschen", "Delete", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Inhalt", "ContentGroup", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
+                    @Html.ActionLink("Bearbeiten", "Edit2", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
+                    @Html.ActionLink("Löschen", "Delete", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
                 </span>
             </td>
         </tr>
