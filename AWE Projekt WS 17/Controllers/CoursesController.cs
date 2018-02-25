@@ -324,13 +324,28 @@ namespace AWE_Projekt_WS_17.Controllers
             ViewBag.Counter = db.ContentElements.Where(x => x.ContentID.Equals(id)).Count();
             return View(await db.ContentElements.Where(x => x.ContentID.Equals(id)).ToListAsync());
         }
+        public async Task<ActionResult> Edit2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = await db.Courses.FindAsync(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ID = User.Identity.GetUserId();
+            return View(course);
+        }
+
 
         // POST: Courses/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Description,Owner")] Course course)
+        public async Task<ActionResult> Edit2([Bind(Include = "ID,Title,Description,Owner")] Course course)
         {
 
             if (ModelState.IsValid)
@@ -339,6 +354,7 @@ namespace AWE_Projekt_WS_17.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.ID = User.Identity.GetUserId();
             return View(course);
         }
 
@@ -393,7 +409,7 @@ namespace AWE_Projekt_WS_17.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("ContentGroup", new { id = temp });
         }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
