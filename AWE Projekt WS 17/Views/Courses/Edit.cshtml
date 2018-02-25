@@ -76,7 +76,7 @@
                     @Html.DisplayFor(modelItem => item.Order)
                 </td>
                 <td>
-                    @Html.ActionLink("Löschen", "DeleteElement", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Löschen", "DeleteElement", new { id = item.ID }, new { @class = "btn btn-primary", @style = "background-color: #0080FF" })
                 </td>
             </tr>
         }
@@ -87,7 +87,7 @@
 
 <br />
 
-<button class="btn btn-primary" id="butt">Neue Inhaltsgruppe</button>
+<button class="btn btn-primary" id="butt" style="background-color: #0080FF;">Neue Inhaltsgruppe</button>
 
 <h2>Kursinhalt</h2>
 @using (Html.BeginForm("CreateContentElement", "Courses", FormMethod.Get))
@@ -138,7 +138,7 @@
     <input type="hidden" value="@id" name="contentId" id="contentId" />
     <div class="form-group">
         <div class="col-md-offset-4 col-md-6">
-            <input type="submit" value="Erstellen" class="btn btn-primary" />
+            <input type="submit" value="Erstellen" class="btn btn-primary" style = "background-color: #0080FF"/>
         </div>
     </div>
 
