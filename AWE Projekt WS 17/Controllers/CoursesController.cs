@@ -39,7 +39,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateContentGroup([Bind(Include = "ID,CourseID,Order,Header")] ContentGroup contentGroup)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.ContentGroups.Add(contentGroup);
                 await db.SaveChangesAsync();
@@ -307,7 +307,7 @@ namespace AWE_Projekt_WS_17.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Description,Owner")] Course course)
         {
-            
+
             if (ModelState.IsValid)
             {
                 db.Entry(course).State = EntityState.Modified;
@@ -357,12 +357,16 @@ namespace AWE_Projekt_WS_17.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost, ActionName("DeleteContentGroup")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteContentGroupConfirmed(int id)
         {
+
             ContentGroup contentGroup = await db.ContentGroups.FindAsync(id);
+            int temp = contentGroup.CourseID;
             db.ContentGroups.Remove(contentGroup);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("ContentGroup", new { id = temp });
         }
 
         protected override void Dispose(bool disposing)
