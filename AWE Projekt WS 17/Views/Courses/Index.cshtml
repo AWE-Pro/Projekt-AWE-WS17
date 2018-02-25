@@ -29,7 +29,7 @@
 <h2 style="padding-bottom: 30px;">
     Meine Kurse
     <span style="float: none; padding-left: 5%;">
-        @Html.ActionLink("Neu erstellen", "Create", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Neu erstellen", "Create", null, new { @class = "btn btn-primary" })
     </span>
 </h2>
 
@@ -55,9 +55,9 @@
             </td>
             <td style="text-align: right;">
                 <span class="btn-group" role="group">
-                    @Html.ActionLink("Inhalt", "ContentGroup", new { id = item.ID }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Bearbeiten", "Edit2", new { id = item.ID }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Löschen", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Inhalt", "ContentGroup", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Bearbeiten", "Edit2", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Löschen", "Delete", new { id = item.ID }, new { @class = "btn btn-primary" })
                 </span>
             </td>
         </tr>

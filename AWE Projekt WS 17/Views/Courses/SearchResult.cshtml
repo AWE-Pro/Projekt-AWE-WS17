@@ -28,9 +28,9 @@
 </nav>
 
 <h2 style="padding-bottom: 30px;">
-    SearchResults
+    Suchergebnisse
     <span style="float: none; padding-left: 5%;">
-        @Html.ActionLink("Zurück", "Search", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Zurück", "Search", null, new { @class = "btn btn-primary" })
     </span>
 </h2>
 
@@ -56,7 +56,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Öffnen", "Course", new { CourseId = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Öffnen", "Course", new { CourseId = item.ID }, new { @class = "btn btn-primary" })
             </td>
         </tr>
     }

@@ -30,7 +30,7 @@
 <h2 style="padding-bottom: 30px;">
     ContentGroups
     <span style="float: none; padding-left: 5%;">
-        @Html.ActionLink("Neu erstellen", "CreateContentGroup", new { id = ViewBag.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Neu erstellen", "CreateContentGroup", new { id = ViewBag.ID }, new { @class = "btn btn-primary" })
     </span>
 </h2>
 
@@ -57,13 +57,13 @@
             </td>
             <td style="text-align: right;">
                 <span class="btn-group" role="group">
-                    @Html.ActionLink("Inhalt", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Bearbeiten", "Edit3", new { id = item.ID }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Inhalt", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Bearbeiten", "Edit3", new { id = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Löschen", "DeleteContentGroup", new { id = item.ID }, new { @class = "btn btn-primary" })
                 </span>
             </td>
         </tr>
     }
 </table>
-@Html.ActionLink("Zurück", "Index", null,  new { @class = "btn btn-default" })
+@Html.ActionLink("Zurück", "Index", null,  new { @class = "btn btn-primary" })
 

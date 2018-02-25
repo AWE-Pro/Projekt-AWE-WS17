@@ -106,10 +106,12 @@ namespace AWE_Projekt_WS_17.Models
         public int ID { get; set; }
         [ForeignKey("ContentGroup")]
         public int ContentID { get; set; }
+        [Display(Name = "Beschreibung")]
         public string Description { get; set; }
-        [Display(Name ="Content")]
+        [Display(Name ="Inhalt")]
         public string Url { get; set; }
         public int TypeID { get; set; }
+        [Display(Name = "Rang")]
         public int Order { get; set; }
 
         public virtual ContentGroup ContentGroup { get; set; }
@@ -119,7 +121,7 @@ namespace AWE_Projekt_WS_17.Models
     public class Type
     {
         public int ID { get; set; }
-        [Display(Name = "Type-Name")]
+        [Display(Name = "Typ")]
         public string Name { get; set; }
 
         public virtual ICollection<ContentElement> ContentElements { get; set; }
