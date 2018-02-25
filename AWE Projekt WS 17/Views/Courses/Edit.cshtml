@@ -4,8 +4,10 @@
 }
 @{
     int id = ViewBag.ContentID;
-    int counter = ViewBag.Counter;
+    int counter = ViewBag.Counter + 1;
 }
+@if (counter >= 2)
+{
 <table class="table">
     <tr>
         <th>
@@ -45,7 +47,7 @@
     }
 
 </table>
-
+}
 <br />
 
 <button class="btn btn-primary" id="butt">new</button>
@@ -86,7 +88,7 @@
 
                     <h4>Value</h4>
                     <label for="value">Value (e.g. Hyperlink to Videofile)</label>
-                    <input type="url" class="form-control" id="inputUrl">
+                    <input type="text" class="form-control" id="inputUrl">
 
                 </div>
 
@@ -95,8 +97,13 @@
                     <h4>Order</h4>
                     <label for="order">Select Position of Content</label>
                     <select class="form-control drop" id="dropdown">
-                        @for (int i = 1; i <= @counter+1; i++) {
-                        <option value = @i>@i</option>
+                        @if (counter >= 2)
+                        {
+                        <option value = @counter>@counter</option>
+                        }
+                        else
+                        {
+                        <option value= 1 >1</option>
                         }
                     </select>
 
@@ -146,17 +153,16 @@
 
                 //inject new section
                 .appendTo('#sections');
-            var gay = @counter + sectionsCount;
-            for (var j = 1; j <= gay; j++) {
+            var count = @counter + sectionsCount;
                 $('.drop')
                     .find('option')
                     .remove()
                     .end()
 
-                for (var i = 1; i <= gay; i++) {
+                for (var i = @counter; i < count; i++) {
                     $('<option value="' + i + '">' + i + '</option>').appendTo('.drop');
                 }
-            }
+
             return false;
         });
     </script>
