@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "CourseContent";
 }
 
@@ -27,6 +28,7 @@
     <div id="sections">
         <div class="section">
             <div class="container">
+
                 <div class="form-group col-md-3 test">
                     <h4>Description and Type</h4>
                     <label for="inputDescription">Description</label>
@@ -38,7 +40,6 @@
                         <option>Text</option>
                     </select>
 
-
                 </div>
                 <div class="form-group col-md-3 test middle">
 
@@ -47,36 +48,38 @@
                     <input type="url" class="form-control" id="inputUrl">
 
                 </div>
+
                 <div class="form-group col-md-3 test">
 
                     <h4>Order</h4>
                     <label for="order">Select Position of Content</label>
-                    <select class="form-control" id="inputNumber">
+                    <select class="form-control drop" id="dropdown">
                         <option value="1">1</option>
-                        </select>
+                    </select>
 
                 </div>
             </div>
         </div>
-
         <div style="clear:both;"></div>
     </div>
+
     <div class="form-group">
         <div class="col-md-offset-4 col-md-6">
             <input type="submit" value="Erstellen" class="btn btn-default" />
         </div>
     </div>
 
-
 </form>
 
 @section scripts {
     <script type="text/javascript" src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
+
         var template = $('#sections .section:first').clone();
 
         //define counter
         var sectionsCount = 1;
+        $alpha = $("#dropdown");
 
         //add new section
         $('body').on('click', '#butt', function () {
@@ -100,8 +103,18 @@
 
                 //inject new section
                 .appendTo('#sections');
+
+            for (var j = 1; j <= sectionsCount; j++) {
+                $('.drop')
+                    .find('option')
+                    .remove()
+                    .end()
+
+                for (var i = 1; i <= sectionsCount; i++) {
+                    $('<option value="' + i + '">' + i + '</option>').appendTo('.drop');
+                }
+            }
             return false;
         });
-
     </script>
 }
