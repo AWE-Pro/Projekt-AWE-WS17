@@ -1,10 +1,17 @@
 ﻿@model AWE_Projekt_WS_17.Models.Tag
 
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Suche";
 }
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Startseite</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Kurssuche</li>
+    </ol>
+</nav>
 
-<h2>Search</h2>
+
+<h2>Suche</h2>
 <p>
     @Html.ActionLink("Startseite", "Index", "Home")
 </p>
