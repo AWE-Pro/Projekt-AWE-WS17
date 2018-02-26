@@ -210,6 +210,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-AWE Projekt WS 17-20180116015334.mdf" />
+    <Content Include="App_Data\aspnet-AWE Projekt WS 17-20180116015334_log.ldf">
+      <DependentUpon>aspnet-AWE Projekt WS 17-20180116015334.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -3346,9 +3350,7 @@
     <Content Include="Views\Courses\Edit3.cshtml" />
     <Content Include="Views\Courses\DeleteElement.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />

@@ -80,8 +80,7 @@
                                 <p style="border-bottom: 1px solid black; font-size: 2em;">
                                     @Html.DisplayFor(model => element.Description)
                                 </p>
-                                <h3 style="text-align: justify;">
-                                    @switch (element.TypeID)
+                                    switch (element.TypeID)
                                     {
                                         case 1:
                                             <iframe type="text/html" width="640" height="385"
@@ -91,10 +90,9 @@
                                             <a href=@element.Url target="_blank">@element.Url</a><hr /><br />
                                             break;
                                         case 3:
-                                            <h3>@element.Url</h3><hr /><br />
+                                            <h3 style="text-align: justify;">@element.Url</h3><hr /><br />
                                             break;
                                     }
-                                </h3>
                             }
                         </dl>
                     </div>
