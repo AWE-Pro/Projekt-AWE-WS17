@@ -33,7 +33,7 @@ namespace AWE_Projekt_WS_17.Migrations
                 new Tag {Name ="Bad"},
                 new Tag {Name ="Boring"},
                 new Tag {Name ="Funny"},
-                new Tag {Name ="Awe"},
+                new Tag {Name ="Engineering"},
                 new Tag {Name ="Annyoing"},
                 new Tag {Name ="Ajax"},
                 new Tag {Name ="Asp"}
@@ -91,7 +91,7 @@ namespace AWE_Projekt_WS_17.Migrations
             AddOrUpdateTag(context, "Volkswirtschaftslehre", "Boring");
             AddOrUpdateTag(context, "Algorithmen und Datenstrukturen", "Boring");
             AddOrUpdateTag(context, "Data Mining", "Funny");
-            AddOrUpdateTag(context, "Advanced Web-Engineering", "Awe");
+            AddOrUpdateTag(context, "Advanced Web-Engineering", "Engineering");
         }
 
         void AddOrUpdateTag(ApplicationDbContext context, string courseTitle, string tagName)
