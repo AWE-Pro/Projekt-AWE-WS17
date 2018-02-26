@@ -77,10 +77,16 @@
                         <dl class="dl-horizontal" style="padding-left: 10%; padding-right: 10%;">
                             @foreach (var element in item.ContentElements)
                             {
-                                <p style="border-bottom: 1px solid black; font-size: 2em;">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Description)
+                                </dt>
+                                <dd>
                                     @Html.DisplayFor(model => element.Description)
-                                </p>
-                                <h3 style="text-align: justify;">
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContentElements.FirstOrDefault().Url)
+                                </dt>
+                                <dd>
                                     @switch (element.TypeID)
                                     {
                                         case 1:
@@ -94,7 +100,7 @@
                                             <h3>@element.Url</h3><hr /><br />
                                             break;
                                     }
-                                </h3>
+                                </dd>
                             }
                         </dl>
                     </div>
