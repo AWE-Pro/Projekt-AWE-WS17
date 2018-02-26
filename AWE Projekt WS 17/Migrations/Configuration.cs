@@ -33,7 +33,10 @@ namespace AWE_Projekt_WS_17.Migrations
                 new Tag {Name ="Bad"},
                 new Tag {Name ="Boring"},
                 new Tag {Name ="Funny"},
-                new Tag {Name ="Awe"}
+                new Tag {Name ="Awe"},
+                new Tag {Name ="Annyoing"},
+                new Tag {Name ="Ajax"},
+                new Tag {Name ="Asp"}
             };
             tags.ForEach(s => context.Tags.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
